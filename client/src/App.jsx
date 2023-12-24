@@ -11,13 +11,14 @@ import { getUserData } from "./components/store/features/usersSlice";
 // import Cookies from "universal-cookie";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import PacientForm from "./components/Pacients/PacientForm";
+
 import ClinicalHistory from "./components/Pacients/ClinicalHistory";
 import PatientData from "./views/PatientData";
 import PatientHistory from "./views/PatientHistory";
 import Diente from "./views/Diente";
 import Odontograma from "./views/Odontograma";
 import Landing from "./views/Landing";
+import ClientForm from "./components/Pacients/PacientForm";
 // import { ThemeProvider, createTheme } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
 
@@ -32,14 +33,14 @@ function App() {
       {/* Dashboard routes */}
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/client-form" element={<ClientForm />} />
       <Route path="/citas" element={<Citas />} />
       <Route path="/inventario" element={<Inventory />} />
-      <Route path="/registrarse" element={<Register />} />
       <Route path="/pacientes" element={<Patients />} />
       <Route path="/pacientes/:id" element={<PatientDetails />} />
       <Route path="/recuperacion-contraseña" element={<PassRecovery />} />
       <Route path="/restablecer-contrasena" element={<PassRestore />} />
-      <Route path="/datos-personales" element={<PacientForm />} />
       <Route path="/historial-medico" element={<ClinicalHistory />} />
       <Route path="/datos" element={<PatientData />} />
       <Route path="/historial" element={<PatientHistory />} />

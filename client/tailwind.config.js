@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "login-pattern": "url('/client/src/assets/dentista.avif')",
+      },
       screens: {
         xs: "390px",
       },

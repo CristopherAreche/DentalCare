@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import bottonWave from "../../assets/botton_wave.png";
-import topWave from "../../assets/topwave.png";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import Swal from "sweetalert2";
 import {
@@ -21,10 +19,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { createClient } from "../store/features/clientSlice";
 import DateOfBirth from "./DateOfBirth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import RegistrationImage from "../../assets/login_image.avif";
+import { FaArrowLeft } from "react-icons/fa";
 
 library.add(faIdCard, faLock, faEnvelope, faUser);
 
-const PacientForm = () => {
+const ClientForm = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const {
@@ -63,7 +63,7 @@ const PacientForm = () => {
         nav("/historial-medico");
       } else {
         Swal.fire(
-          "Hubo un error al realizar la operación, verifique que los datos sean correctos.",
+          "There was an error with the form, verify all the information is correct.",
           "",
           "error"
         );
@@ -78,360 +78,288 @@ const PacientForm = () => {
   };
 
   return (
-    <div className="bg-secondary-100 flex items-center justify-center overflow-y-hidden h-[100vh]">
-      <form className="w-[900px] h-full bg-primary p-5 mx-3 rounded-3xl shadow-2xl z-10">
-        <h2 className="text-4xl font-bold text-center italic text-white pb-10">
-          Datos Personales
-        </h2>
-        <div className="flex lg:flex-row md:flex-row flex-col h-[30em] overflow-y-auto scrollbar-hide">
-          <div className="flex flex-col lg:w-1/2 items-center gap-5 px-3 pt-5 ">
-            <div className="flex justify-between w-full items-center">
-              <label className="text-white ">DNI</label>
-              <input
-                defaultValue={user}
-                className="border p-2 rounded w-[17em]"
-                placeholder="Ingrese su DNI"
-                {...register("dni", {
-                  required: "Campo obligatorio",
-                })}
-                onBlur={() => handleBlur("dni")}
-                readOnly
-              />
-            </div>
+    <div className="py-40 flex justify-center items-center h-screen bg-gradient-to-r from-[#0E264B] to-[#496FAA]">
+      <div className="container">
+        <div className="flex w-full bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
+          <div
+            className="w-1/2 flex flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center"
+            style={{ backgroundImage: `url(${RegistrationImage})` }}
+          />
+          <div className="w-1/2 flex flex-col mx-auto bg-white py-4 px-4">
+            <Link
+              to={"/register"}
+              className="relative flex gap-2 text-black mb-3 w-full justify-end"
+            >
+              <FaArrowLeft />
+              <span>Go Back</span>
+            </Link>
+            <h2 className="text-4xl font-bold text-center  text-gray-800 pb-10">
+              Patient&apos;s Details
+            </h2>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Nombre</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese su Nombre"
-                  {...register("nombre", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("nombre")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.nombre && (
-                  <label className=" h-0 text-red-500">
-                    {errors.nombre.message}
-                  </label>
-                )}
-              </div>
-            </div>
+            <form>
+              <div className="flex lg:flex-row md:flex-row flex-col h-[30em] overflow-y-auto scrollbar-hide">
+                <div className="flex flex-col lg:w-1/2 items-center gap-5 px-3 pt-5 ">
+                  {/* ID */}
+                  <div className="flex justify-between w-full items-center">
+                    <input
+                      defaultValue={user}
+                      className="border border-gray-400 py-1 px-2 w-full"
+                      placeholder="ID"
+                      {...register("dni", {
+                        required: "Filed required",
+                      })}
+                      onBlur={() => handleBlur("dni")}
+                      readOnly
+                    />
+                  </div>
+                  {/* Name */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.nombre ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Name"
+                      {...register("nombre", {
+                        required: "Filed required",
+                      })}
+                      onBlur={() => handleBlur("nombre")}
+                    />
+                  </div>
+                  {/* Last name */}
+                  <div className="flex flex-col w-full items-center justify-between ">
+                    <div className="flex flex-col w-full">
+                      <input
+                        className={`border border-gray-400 py-1 px-2 w-full ${
+                          errors.apellido ? "border-red-500" : ""
+                        }`}
+                        type="text"
+                        placeholder="Last Name"
+                        {...register("apellido", {
+                          required: "Required field",
+                        })}
+                        onBlur={() => handleBlur("apellido")}
+                      />
+                    </div>
+                  </div>
+                  {/* age */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.edad ? "border-red-500" : ""
+                      }`}
+                      type="number"
+                      placeholder="Age"
+                      {...register("edad", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("edad")}
+                    />
+                  </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Apellido</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese su Apellido"
-                  {...register("apellido", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("apellido")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.apellido && (
-                  <label className=" h-0 text-red-500">
-                    {errors.apellido.message}
-                  </label>
-                )}
-              </div>
-            </div>
+                  {/* DOB */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.fechaNacimiento ? "border-red-500" : ""
+                      }`}
+                      type="date"
+                      placeholder="Date of Birth"
+                      {...register("fechaNacimiento", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("fechaNacimiento")}
+                    />
+                  </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Edad</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="number"
-                  placeholder="Ingrese su Edad"
-                  {...register("edad", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("edad")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.edad && (
-                  <label className=" h-0 text-red-500">
-                    {errors.edad.message}
-                  </label>
-                )}
-              </div>
-            </div>
+                  {/* address */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.localidad ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Address"
+                      {...register("localidad", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("localidad")}
+                    />
+                  </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Fecha</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="date"
-                  placeholder="Ingrese su Fecha de Nacimiento"
-                  {...register("fechaNacimiento", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("fechaNacimiento")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.fechaNacimiento && (
-                  <label className=" h-0 text-red-500">
-                    {errors.fechaNacimiento.message}
-                  </label>
-                )}
-              </div>
-            </div>
+                  {/* Apt */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.localidad ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Apt"
+                      {...register("domicilio", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("domicilio")}
+                    />
+                  </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Localidad</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Localidad"
-                  {...register("localidad", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("localidad")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.localidad && (
-                  <label className=" h-0 text-red-500">
-                    {errors.localidad.message}
-                  </label>
-                )}
-              </div>
-            </div>
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Domicilio</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Domicilio"
-                  {...register("domicilio", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("domicilio")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.localidad && (
-                  <label className=" h-0 text-red-500">
-                    {errors.localidad.message}
-                  </label>
-                )}
-              </div>
-            </div>
+                  {/* Email */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.email ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Email"
+                      {...register("email", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("email")}
+                    />
+                  </div>
+                </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Email</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese su Email"
-                  {...register("email", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("email")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.email && (
-                  <label className=" h-0 text-red-500">
-                    {errors.email.message}
-                  </label>
-                )}
-              </div>
-            </div>
-          </div>
-          <div className="flex  flex-col lg:w-1/2 items-center gap-5 px-3 pt-5 ">
-            {/* <div className=" flex-row flex justify-center gap-2">
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="number"
-                  defaultValue={0}
-                  readOnly
-                  hidden
-                  {...register("nroHistoriaClinica")}
-                  onBlur={() => handleBlur("nroHistoriaClinica")}
-                />
-                {errors.email && (
-                  <p className="h-0 text-red-500">{errors.email.message}</p>
-                )}
-              </div> */}
+                <div className="flex  flex-col lg:w-1/2 items-center gap-5 px-3 pt-5 ">
+                  {/* Profession */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.ocupacion ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Profession"
+                      {...register("ocupacion", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("ocupacion")}
+                    />
+                  </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Ocupacion</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese su Ocupacion / Profesion"
-                  {...register("ocupacion", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("ocupacion")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.ocupacion && (
-                  <label className=" h-0 text-red-500">
-                    {errors.ocupacion.message}
-                  </label>
-                )}
-              </div>
-            </div>
+                  {/* Phone number */}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.telefono1 ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Phone Number"
+                      {...register("telefono1", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("telefono1")}
+                    />
+                  </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Telefono</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese su Numero de Telefono"
-                  {...register("telefono1", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("telefono1")}
-                />
-              </div>
-              <div className="ml-10">
-                {errors.telefono1 && (
-                  <label className=" h-0 text-red-500">
-                    {errors.telefono1.message}
-                  </label>
-                )}
-              </div>
-            </div>
+                  {/* Phone number 2*/}
+                  <div className="flex justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.telefono1 ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Secondary Phone Number"
+                      {...register("telefono1", {})}
+                      onBlur={() => handleBlur("telefono2")}
+                    />
+                  </div>
 
-            <div className="flex flex-col w-full items-center justify-between ">
-              <div className="flex justify-between items-center w-full">
-                <label className="text-white ">Otro telefono</label>
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese Otro Numero de Telefono"
-                  {...register("telefono2", {})}
-                  onBlur={() => handleBlur("telefono2")}
-                />
-              </div>
-            </div>
+                  {/* Social Duty */}
+                  <div className="flex flex-col items-center justify-between w-full">
+                    <select
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.obraSocial ? "border-red-500" : ""
+                      }`}
+                      {...register("obraSocial", {
+                        required: "Required field",
+                      })}
+                      onBlur={() => handleBlur("obraSocial")}
+                      defaultValue="Hola"
+                    >
+                      <option value="">Select Social Duty</option>
+                      <option value="Particular">Particular</option>
+                      <option value="OSDE">OSDE</option>
+                      <option value="Medifé">Medifé</option>
+                      <option value="Swiss Medical">Swiss Medical</option>
+                      <option value="GALENO">GALENO</option>
+                    </select>
+                  </div>
 
-            <div className="flex  flex-row items-center gap-2 w-full">
-              <label className="text-white ">Obra social</label>
-              <div className="flex flex-col items-center justify-between w-full">
-                <select
-                  className="border p-2 rounded w-[17em] text-gray-400"
-                  {...register("obraSocial", {
-                    required: "Campo obligatorio",
-                  })}
-                  onBlur={() => handleBlur("obraSocial")}
-                  defaultValue="Hola"
+                  {/* Medical insurance */}
+                  <div className="flex flex-col items-center justify-between w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.plan ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Medical Insurance"
+                      {...register("plan", {
+                        validate: (val) => {
+                          if (watch("obraSocial") != "Particular" && !val) {
+                            return "Required field";
+                          }
+                          return true;
+                        },
+                      })}
+                      onBlur={() => handleBlur("plan")}
+                    />
+                  </div>
+
+                  {/* Headline */}
+                  <div className="flex flex-col justify-between items-center w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.titular ? "border-red-500" : ""
+                      }`}
+                      type="text"
+                      placeholder="Headline"
+                      {...register("titular", {
+                        validate: (val) => {
+                          if (watch("obraSocial") != "Particular" && !val) {
+                            return "Required field";
+                          }
+                          return true;
+                        },
+                      })}
+                      onBlur={() => handleBlur("titular")}
+                    />
+                  </div>
+
+                  {/* Affiliate Number */}
+                  <div className="flex flex-col items-center justify-between w-full">
+                    <input
+                      className={`border border-gray-400 py-1 px-2 w-full ${
+                        errors.afiliado ? "border-red-500" : ""
+                      }`}
+                      type="number"
+                      placeholder="Affiliate Number"
+                      {...register("afiliado", {
+                        validate: (val) => {
+                          if (watch("obraSocial") != "Particular" && !val) {
+                            return "Required field";
+                          }
+                          return true;
+                        },
+                      })}
+                      onBlur={() => handleBlur("afiliado")}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="flex justify-center py-1">
+                <button
+                  className="font-bold w-1/2 border-none rounded-md my-5 py-3 bg-blue-500 hover:bg-blue-600 text-white "
+                  type="submit"
+                  onClick={handleSubmit(onSubmit)}
                 >
-                  <option value="">Seleccione obra social</option>
-                  <option value="Particular">Particular</option>
-                  <option value="OSDE">OSDE</option>
-                  <option value="Medifé">Medifé</option>
-                  <option value="Swiss Medical">Swiss Medical</option>
-                  <option value="GALENO">GALENO</option>
-                </select>
-                {errors.obraSocial && (
-                  <p className="h-0 text-red-500">
-                    {errors.obraSocial.message}
-                  </p>
-                )}
+                  Next
+                </button>
               </div>
-            </div>
-
-            <div className="flex flex-row items-center gap-2 w-full">
-              <label className="text-white ">Plan</label>
-              <div className="flex flex-col items-center justify-between w-full">
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese su Plan"
-                  {...register("plan", {
-                    validate: (val) => {
-                      if (watch("obraSocial") != "Particular" && !val) {
-                        return "Campo obligatorio";
-                      }
-                      return true;
-                    },
-                  })}
-                  onBlur={() => handleBlur("plan")}
-                />
-                {errors.plan && (
-                  <p className="h-0 text-red-500">{errors.plan.message}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-row items-center gap-2 w-full">
-              <label className="text-white ">Titular</label>
-              <div className="flex flex-col justify-between items-center w-full">
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="text"
-                  placeholder="Ingrese el titular"
-                  {...register("titular", {
-                    validate: (val) => {
-                      if (watch("obraSocial") != "Particular" && !val) {
-                        return "Campo obligatorio";
-                      }
-                      return true;
-                    },
-                  })}
-                  onBlur={() => handleBlur("titular")}
-                />
-                {errors.titular && (
-                  <p className="h-0 text-red-500">{errors.titular.message}</p>
-                )}
-              </div>
-            </div>
-            <div className="flex flex-row items-center gap-2 w-full">
-              <label className="text-white ">N° de afiliado</label>
-              <div className="flex flex-col items-center justify-between w-full">
-                <input
-                  className="border p-2 rounded w-[17em]"
-                  type="number"
-                  placeholder="Ingrese el numero de afiliado"
-                  {...register("afiliado", {
-                    validate: (val) => {
-                      if (watch("obraSocial") != "Particular" && !val) {
-                        return "Campo obligatorio";
-                      }
-                      return true;
-                    },
-                  })}
-                  onBlur={() => handleBlur("afiliado")}
-                />
-                {errors.afiliado && (
-                  <p className="h-0 text-red-500">{errors.afiliado.message}</p>
-                )}
-              </div>
-            </div>
+            </form>
           </div>
         </div>
-        <div className="flex justify-center py-1">
-          <button
-            className="font-bold w-[8em] border-none rounded-2xl my-5 py-3 bg-button-100 hover:bg-button-100/80 text-white "
-            type="submit"
-            onClick={handleSubmit(onSubmit)}
-          >
-            Siguiente
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
 
-export default PacientForm;
+export default ClientForm;

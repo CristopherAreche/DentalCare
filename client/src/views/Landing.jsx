@@ -13,7 +13,7 @@ const Landing = () => {
   return (
     <div className="flex flex-col h-[100vh] w-[100vw]">
       {/* Header */}
-      <div className="bg-[#0e264b] flex justify-between text-[#f4f9ff] py-4 px-[11em] text-lg">
+      <div className=" flex justify-between text-[#f4f9ff] py-4 px-[11em] text-lg bg-gradient-to-r from-[#0E264B] to-[#3e66a1]">
         <div className="flex justify-center gap-3 items-center">
           <div className="text-white font-bold flex justify-center items-center">
             <CiLocationOn style={{ height: "30px", width: "30px" }} />
@@ -44,13 +44,16 @@ const Landing = () => {
             <FaPhoneAlt />
           </div>
           <label className="font-bold">+347-765-4321</label>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-full">
+          <Link
+            to="/register"
+            className="bg-blue-600 hover:bg-blue-700 text-white text-center self-center py-2 px-4 rounded-full hover:no-underline"
+          >
             Book Consultation
-          </button>
+          </Link>
         </div>
       </div>
       {/* Hero */}
-      <div className="flex justify-center h-screen w-screen bg-[#0e264b] pt-20 px-[8em] ">
+      <div className="flex justify-center h-screen w-screen  pt-20 px-[8em] bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
         <div className="flex justify-start gap-10  ">
           {/* left */}
           <div className="flex justify-center gap-14 w-[70%]">
@@ -104,7 +107,7 @@ const Landing = () => {
               </p>
               <div className="flex justify-between">
                 <Link
-                  to="/login"
+                  to="/register"
                   className="bg-blue-600 hover:bg-blue-700 text-white text-center self-center py-2 px-4 rounded-full hover:no-underline"
                 >
                   Book Consultation
