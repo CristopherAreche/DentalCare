@@ -34,7 +34,7 @@ const AppointmentUser = () => {
   const dia = date.getDate();
   const mes = date.getMonth() + 1;
   const año = date.getFullYear();
-  const currentDateISO = `${dia.toString().padStart(2, "0")}/${mes
+  const currentDateISO = `${dia?.toString().padStart(2, "0")}/${mes
     .toString()
     .padStart(2, "0")}/${año}`;
   const currentTime = date.getHours();
@@ -45,8 +45,8 @@ const AppointmentUser = () => {
     const dia = currentDate.getUTCDate();
     const mes = currentDate.getMonth() + 1;
     const año = currentDate.getFullYear();
-    const currentDateISO = `${año}-${mes.toString().padStart(2, "0")}-${dia
-      .toString()
+    const currentDateISO = `${año}-${mes?.toString().padStart(2, "0")}-${dia
+      ?.toString()
       .padStart(2, "0")}`;
 
     // Convertir la fecha de "dd/MM/yyyy" a "yyyy-MM-dd"
@@ -63,7 +63,7 @@ const AppointmentUser = () => {
   });
 
   const userAppointments = allAppointments.filter((a) => {
-    return a.pacienteId === dni.toString() && a.fecha >= currentDateISO;
+    return a.pacienteId === dni?.toString() && a.fecha >= currentDateISO;
   });
 
   const handleSelectAppointment = async (date, time) => {

@@ -47,7 +47,7 @@ const PersonalDataForm = () => {
   const yyyy = fechaNacimiento.getFullYear();
   const fechaClienteFormateada = `${yyyy}-${mm}-${dd}`;
   const isSmallScreen = window.innerWidth < 640;
- console.log("client",client);
+  console.log("client", client);
   const onSubmit = async (data) => {
     try {
       const fechaNacimiento = new Date(data?.fechaNacimiento);
@@ -72,7 +72,7 @@ const PersonalDataForm = () => {
 
       if (result.isConfirmed) {
         const response = await dispatch(updateClient(newData));
-        console.log("esto es new data",newData);
+        console.log("esto es new data", newData);
 
         const Toast = Swal.mixin({
           toast: true,
@@ -116,27 +116,27 @@ const PersonalDataForm = () => {
   };
   return (
     <>
-      <form className="w-[95vw] pt-0 flex flex-col justify-evenly items-center lg:w-[70vw] lg:h-[80vh] md:h-[80vh] h-[89vh] xs:mb-[4em] bg-primary py-4 rounded-3xl shadow-2xl z-10">
-        <h2 className="lg:text-6xl text-4xl font-bold text-center italic text-white">
-          Datos Personales
+      <form className="w-[95vw] flex flex-col gap-8 px-3 justify-evenly items-center lg:w-[60vw] lg:h-[80vh] md:h-[80vh] h-[89%] xs:mb-[4em] bg-white py-4 rounded-lg shadow-2xl">
+        <h2 className="lg:text-3xl text-4xl font-bold text-center  text-gray-900 uppercase">
+          Personal Information
         </h2>
-        <div className="bg-secondary-150 shadow-xl w-full flex justify-center lg:flex-row flex-col items-center h-[500px] overflow-y-auto overflow-x-hidden">
-          <div className=" p-3 flex flex-col gap-4 lg:gap-6 h-full w-full lg:w-1/2">
+        <div className=" w-full flex justify-center lg:flex-row flex-col h-full pt-[12em] md:pt-0 md:h-[500px] overflow-y-auto">
+          <div className="p-3 flex flex-col gap-2 lg:gap-6 h-full w-full lg:w-1/2">
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">DNI</label>
+              <label className="text-1xl text-gray-900">ID</label>
               <input
                 defaultValue={client?.dni}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 {...register("dni")}
                 onBlur={() => handleBlur("dni")}
                 readOnly
               />
             </div>
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Nombre</label>
+              <label className="text-1xl text-gray-900">Name</label>
               <input
                 defaultValue={client?.nombre}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="text"
                 placeholder="Ingrese su Nombre"
                 {...register("nombre")}
@@ -147,10 +147,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.nombre.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Apellido</label>
+              <label className="text-1xl ">Apellido</label>
               <input
                 defaultValue={client?.apellido}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="text"
                 placeholder="Ingrese su Apellido"
                 {...register("apellido")}
@@ -161,10 +161,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.apellido.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Edad</label>
+              <label className="text-1xl text-gray-900">Edad</label>
               <input
                 defaultValue={client?.edad}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="number"
                 min={3}
                 max={99}
@@ -177,12 +177,12 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.edad.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white w-auto">
+              <label className="text-1xl text-gray-900">
                 Fecha de Nacimiento
               </label>
               <input
                 defaultValue={fechaClienteFormateada}
-                className="border p-2 rounded lg:w-[320px] md:w-[320px] w-[270px]"
+                className="border-[1px] border-gray-400 p-2 rounded w-[19em] lg:w-[320px] md:w-[320px]"
                 type="date"
                 placeholder="Ingrese su fecha de Nacimiento"
                 {...register("fechaNacimiento", {
@@ -197,10 +197,10 @@ const PersonalDataForm = () => {
               </p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Domicilio</label>
+              <label className="text-1xl text-gray-900">Domicilio</label>
               <input
                 defaultValue={client?.domicilio}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded  w-2/3 md:w-[17em]"
                 type="text"
                 placeholder="Ingrese su Domicilio"
                 {...register("domicilio")}
@@ -211,10 +211,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.domicilio.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Localidad</label>
+              <label className="text-1xl text-gray-900">Localidad</label>
               <input
                 defaultValue={client?.localidad}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded  w-2/3 md:w-[17em]"
                 type="text"
                 placeholder="Ingrese su Localidad"
                 {...register("localidad")}
@@ -225,12 +225,12 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.localidad.message}</p>
             )}
           </div>
-          <div className="p-3 flex flex-col gap-4 lg:gap-6 h-full w-full lg:w-1/2">
+          <div className="p-3 flex flex-col gap-2 lg:gap-6 h-full w-full lg:w-1/2">
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Email</label>
+              <label className="text-1xl text-gray-900">Email</label>
               <input
                 defaultValue={client?.email}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="email"
                 placeholder="Ingrese su Email"
                 {...register("email", {
@@ -247,17 +247,11 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.email.message}</p>
             )}
             <div className="flex items-center justify-between gap-3">
-              {isSmallScreen ? (
-                <label className="text-1xl text-white">Ocupacion</label>
-              ) : (
-                <label className="text-1xl text-white">
-                  Ocupación/Profesión
-                </label>
-              )}
+              <label className="text-1xl text-gray-900">Ocupacion</label>
 
               <input
                 defaultValue={client?.ocupacion}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="text"
                 placeholder="Ingrese su Ocupación/Profesión"
                 {...register("ocupacion")}
@@ -268,10 +262,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.ocupacion.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Teléfono</label>
+              <label className="text-1xl text-gray-900">Teléfono</label>
               <input
                 defaultValue={client?.telefono1}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="number"
                 placeholder="Ingrese su telefono"
                 {...register("telefono1", {
@@ -287,12 +281,12 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.telefono1.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">
+              <label className="text-1xl text-gray-900">
                 Teléfono Alternativo
               </label>
               <input
                 defaultValue={client?.telefono2}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-[18em] md:w-[17em]"
                 type="number"
                 placeholder="Ingrese otro telefono"
                 {...register("telefono2", {
@@ -308,10 +302,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.telefono2.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Obra Social</label>
+              <label className="text-1xl text-gray-900">Obra Social</label>
               <select
                 defaultValue={client?.obraSocial}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 placeholder="Seleccione su Obra Social"
                 {...register("obraSocial")}
                 onBlur={() => handleBlur("obraSocial")}
@@ -327,10 +321,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.obraSocial.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Plan</label>
+              <label className="text-1xl text-gray-900">Plan</label>
               <input
                 defaultValue={client?.plan}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="text"
                 placeholder="Ingrese su Plan"
                 {...register("plan", {
@@ -348,10 +342,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.plan.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">Titular</label>
+              <label className="text-1xl text-gray-900">Titular</label>
               <input
                 defaultValue={client?.titular}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="text"
                 placeholder="Ingrese el titular"
                 {...register("titular", {
@@ -369,10 +363,10 @@ const PersonalDataForm = () => {
               <p className="h-0 text-red-500">{errors.titular.message}</p>
             )}
             <div className="flex items-center justify-between">
-              <label className="text-1xl text-white">N° Afiliado</label>
+              <label className="text-1xl text-gray-900">N° Afiliado</label>
               <input
                 defaultValue={client?.afiliado}
-                className="border p-2 rounded w-[17em]"
+                className="border-[1px] border-gray-400 p-2 rounded w-2/3 md:w-[17em]"
                 type="number"
                 placeholder="Ingrese el numero de afiliado"
                 {...register("afiliado", {
@@ -393,7 +387,7 @@ const PersonalDataForm = () => {
         </div>
         <div className="flex justify-center mt-2 ">
           <button
-            className="font-bold w-[8em] border-none rounded-2xl py-3 bg-button-100 hover:bg-button-100/80 text-white text-2xl"
+            className="font-semibold w-[8em] border-none rounded-lg py-3 bg-icon-100 hover:bg-background-200 hover:ring-2 hover:ring-icon-100 hover:text-icon-100 text-white text-2xl"
             type="submit"
             onClick={handleSubmit(onSubmit)}
           >
