@@ -12,11 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Cookie from "universal-cookie";
 
 import { RiCloseFill, RiMenu3Fill } from "react-icons/ri";
+import { FaTooth } from "react-icons/fa";
 
 library.add(faArrowRightFromBracket);
 
 const linkClasses =
-  "flex items-center gap-2 font-light transition-all duration-200 ease-in-out px-3 py-2 hover:bg-secondary-100 hover:no-underline rounded-sm text-base";
+  "flex items-center gap-2 font-light transition-all duration-200 ease-in-out px-3 py-2 hover:bg-icon-100 hover:no-underline text-base hover:text-white mx-1";
 
 const SidebarLink = ({ item }) => {
   const { pathname } = useLocation();
@@ -25,7 +26,7 @@ const SidebarLink = ({ item }) => {
     <Link
       to={item.path}
       className={classNames(
-        pathname === item.path ? "text-white bg-secondary-100" : "text-white",
+        pathname === item.path ? "text-white bg-icon-100" : "text-gray-900",
         linkClasses
       )}
     >
@@ -53,10 +54,13 @@ const Sidebar = () => {
       <section
         className={`${
           isOpen ? "left-0" : "-left-full"
-        }  bg-primary lg:bg-primary lg:w-[20%] w-[100%] shadow-lg z-[50] flex flex-col  justify-between py-4 fixed h-screen transition-all duration-200 lg:left-0`}
+        } bg-background-300 lg:w-[20%] w-[100%] shadow-lg z-[50] flex flex-col  justify-between py-4 fixed h-screen transition-all duration-200 lg:left-0`}
       >
         <div className="flex items-center justify-center gap-2 px-1 py-3">
-          <span className="text-neutral-100 text-3xl font-bold">Conident</span>
+          <div className="text-blue-600">
+            <FaTooth style={{ height: "30px", width: "30px" }} />
+          </div>
+          <span className="text-gray-900 text-3xl font-bold">Dental Care</span>
         </div>
         <div className="flex-1 py-8 flex flex-col gap-0.5">
           {userType === true
@@ -81,7 +85,7 @@ const Sidebar = () => {
         </div>
       </section>
       <button
-        className="absolute bottom-6 right-8 text-4xl lg:hidden bg-primary rounded-full py-1 px-2 box-content z-50 text-light"
+        className="absolute bottom-6 right-8 text-4xl lg:hidden bg-icon-100 text-white rounded-lg py-1 px-2 box-content z-50 text-light"
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? <RiCloseFill /> : <RiMenu3Fill />}

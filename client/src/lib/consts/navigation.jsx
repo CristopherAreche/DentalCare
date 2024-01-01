@@ -41,19 +41,19 @@ export const DASHBOARD_SIDEBAR_LINKS = [
 export const USER_SIDEBAR_LINKS = [
   {
     key: "turnos",
-    label: "Turnos",
+    label: "Appointments",
     path: "/citas",
     icon: <FontAwesomeIcon icon={faChartSimple} />,
   },
   {
     key: "Datos Personales",
-    label: "Datos Personales",
+    label: "My Info",
     path: "/datos",
     icon: <FontAwesomeIcon icon={faUser} />,
   },
   {
     key: "Historial Médico",
-    label: "Historial Médico",
+    label: "Medical History",
     path: "/historial",
     icon: <FontAwesomeIcon icon={faNotesMedical} />,
   },

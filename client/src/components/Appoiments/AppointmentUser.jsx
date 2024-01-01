@@ -170,49 +170,51 @@ const AppointmentUser = () => {
   };
 
   return (
-    <div className="flex flex-col h-[40em]">
-      <ul className="gap-4 flex flex-col items-center py-3 bg-gray-300 text-black h-full lg:w-[50vw] w-[90vw] rounded-lg lg:rounded-2xl px-3 overflow-y-auto scrollbar-hide">
+    <div className="flex flex-col h-[50em]">
+      <ul className="w-full gap-4 flex flex-col items-center py-3 bg-transparent text-black h-full lg:w-[70vw] rounded-md lg:rounded-2xl px-3 overflow-y-auto scrollbar-hide">
         {filteredAppointments.map((item, index) => (
           <div
             key={index}
-            className="bg-primary font-semibold shadow-md rounded-lg p-5"
+            className="bg-background-200 flex flex-col md:flex-row gap-4 font-semibold shadow-md rounded-lg p-5"
           >
-            <label className="flex gap-4 text-2xl lg:px-10">
-              <div>{item?.dia} </div>
-              <div>{item?.fecha}</div>
+            <label className="flex flex-col justify-center gap-4 text-xl text-white ">
+              <div className="uppercase font-semibold">{item?.dia}</div>
+              <div className="font-semibold">{item?.fecha}</div>
             </label>
-            <li
+            <div
               key={item.fecha}
               className="item flex lg:justify-evenly lg:flex-row flex-col w-full"
             >
-              <ul
-                className=" gap-3 flex flex-wrap items-center justify-evenly text-black w-full rounded-lg lg:rounded-2xl overflow-y-auto scrollbar-hide cursor-pointer"
+              <div
+                className="grid grid-cols-2 md:grid-cols-5 gap-2 text-black w-full  overflow-y-auto scrollbar-hide cursor-pointer p-1"
                 name="hora"
               >
                 {item?.horasDisponibles.map((h) => {
                   if (h.disponible) {
                     return (
-                      <li
+                      <div
                         key={h.hora}
                         value={h.hora}
-                        className="bg-gray-300 w-[40%] font-semibold my-2 shadow-md py-1 rounded-lg px-5 flex lg:justify-evenly lg:flex-row flex-col items-center"
+                        className="bg-icon-100 hover:bg-background-200 hover:ring-1 hover:ring-icon-100 hover:text-icon-100 text-white col-span-1 w-[7em] font-semibold  shadow-md py-1 rounded-sm px-5 flex lg:justify-evenly lg:flex-row flex-col items-center"
                         onClick={() =>
                           handleSelectAppointment(item.fecha, h.hora)
                         }
                       >
                         {h.hora}
-                      </li>
+                      </div>
                     );
                   }
                 })}
-              </ul>
-            </li>
+              </div>
+            </div>
           </div>
         ))}
       </ul>
-      <ul className="flex flex-col justify-center items-center mt-4 bg-gray-300 text-black h-[10em] w-full rounded-lg lg:rounded-2xl py-5 px-3 overflow-y-auto scrollbar-hide">
+      <ul className="flex flex-col justify-center items-center mt-4 text-white h-[10em] w-full rounded-lg lg:rounded-2xl py-5 px-3 overflow-y-auto scrollbar-hide">
         {userAppointments.length == 0 ? (
-          <span className="text-2xl">No tienes turnos programados</span>
+          <span className="text-2xl text-center">
+            No appointment has been scheduled
+          </span>
         ) : (
           <li
             key={userAppointments[0]?.id}
