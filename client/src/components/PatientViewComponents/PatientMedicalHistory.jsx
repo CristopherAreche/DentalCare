@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -13,6 +12,7 @@ library.add(faQuestion);
 const PatientMedicalHistory = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -22,10 +22,10 @@ const PatientMedicalHistory = () => {
   } = useForm();
 
   const user = useSelector((state) => state.users.users);
+
   const client = useSelector(
     (state) => state.clients?.selectedClient?.data.historial
   );
-
   useEffect(() => {
     dispatch(fetchClient(user));
   }, [dispatch]);
@@ -63,7 +63,7 @@ const PatientMedicalHistory = () => {
 
         const Toast = Swal.mixin({
           toast: true,
-          position: "top-end",
+          poYestion: "top-end",
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
@@ -84,7 +84,7 @@ const PatientMedicalHistory = () => {
       console.error(response);
       const Toast = Swal.mixin({
         toast: true,
-        position: "top-end",
+        poYestion: "top-end",
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
@@ -103,42 +103,51 @@ const PatientMedicalHistory = () => {
   const handleBlur = (fieldName) => {
     trigger(fieldName);
   };
+
+  const [showInput, setShowInput] = useState(false);
+
+  const handleSelectChange = (e) => {
+    const selectedValue = e.target.value;
+    console.log("selectedValue ->", selectedValue);
+    setShowInput(!selectedValue);
+  };
+
   return (
-    <form className="w-[92vw] flex flex-col justify-center items-center lg:w-[70vw] mx-4 lg:h-[90vh] md:h-[80vh] h-[89vh] bg-primary py-4 rounded-3xl shadow-2xl z-10">
-      <h2 className="lg:text-6xl text-4xl font-bold text-center italic text-white my-5">
-        Historial Médico
+    <form className="w-[92vw] flex flex-col justify-between items-center lg:w-[55vw] lg:max-w-[50em] mx-4 lg:h-[90vh] md:h-[80vh] h-[89vh] bg-white py-4 rounded-3xl shadow-2xl z-10">
+      <h2 className="lg:text-6xl text-4xl font-bold text-center text-gray-900 my-5">
+        Medical History
       </h2>
-      <div className="flex bg-secondary-150 shadow-xl lg:flex-row md:flex-row flex-col h-[55%] w-[95%]  overflow-y-auto mb-3">
+      <div className="flex  lg:flex-row md:flex-row flex-col h-[75%] w-[95%]  overflow-y-auto mb-3">
         <div className="p-4 flex flex-col gap-4 md:w-1/2 xs:w-full">
           <div className=" flex items-center justify-between">
-            <label className="text-1xl text-white">Enfermedades</label>
+            <label className="text-2xl text-gray-900">Illnesses</label>
             <select
               defaultValue={client?.enfermedad}
-              className="border p-2 rounded w-[3em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("enfermedad")}
               onBlur={() => handleBlur("enfermedad")}
+              onChange={(e) => {
+                handleSelectChange(e);
+              }}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.enfermedad && (
             <p className="h-0 text-red-500">{errors.enfermedad.message}</p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+
+          {client?.detalleEnfermedad && (
             <input
               defaultValue={client?.detalleEnfermedad}
-              className="border p-2 rounded w-[17em]"
+              className="ring-1 ring-gray-600 p-2 rounded w-full"
               type="text"
               placeholder="Cual?"
               {...register("detalleEnfermedad", {
                 validate: (val) => {
-                  if (watch("enfermedad") == "true" && !val) {
+                  if (watch("enfermedad") === "Yes" && !val) {
                     return "Debe aclarar que enfermedad/es";
                   }
                   return true;
@@ -146,23 +155,24 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleEnfermedad")}
             />
-          </div>
+          )}
           {errors.detalleEnfermedad && (
             <p className="h-0 text-red-500">
               {errors.detalleEnfermedad.message}
             </p>
           )}
+
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Tratamiento Médico</label>
+            <label className="text-2xl text-gray-900">Medical Treatment</label>
             <select
               defaultValue={client?.tratamientoMedico}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("tratamientoMedico")}
               onBlur={() => handleBlur("tratamientoMedico")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.tratamientoMedico && (
@@ -170,11 +180,8 @@ const PatientMedicalHistory = () => {
               {errors.tratamientoMedico.message}
             </p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+
+          {client.detalleTratamiento && (
             <input
               defaultValue={client?.detalleTratamiento}
               className="border p-2 rounded w-[17em]"
@@ -190,33 +197,31 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleTratamiento")}
             />
-          </div>
+          )}
+
           {errors.detalleTratamiento && (
             <p className="h-0 text-red-500">
               {errors.detalleTratamiento.message}
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Medicación</label>
+            <label className="text-2xl text-gray-900">Medication</label>
             <select
               defaultValue={client?.medicacion}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("medicacion")}
               onBlur={() => handleBlur("medicacion")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.medicacion && (
             <p className="h-0 text-red-500">{errors.medicacion.message}</p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+
+          {client.detalleMedicacion && (
             <input
               defaultValue={client?.detalleMedicacion}
               className="border p-2 rounded w-[17em]"
@@ -232,34 +237,30 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleMedicacion")}
             />
-          </div>
+          )}
+
           {errors.detalleMedicacion && (
             <p className="h-0 text-red-500">
               {errors.detalleMedicacion.message}
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Alergia</label>
+            <label className="text-2xl text-gray-900">Alergia</label>
             <select
               defaultValue={client?.alergia}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("alergia")}
               onBlur={() => handleBlur("alergia")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.alergia && (
             <p className="h-0 text-red-500">{errors.alergia.message}</p>
           )}
-
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+          {client.detalleAlergia && (
             <input
               defaultValue={client?.detalleAlergia}
               className="border p-2 rounded w-[17em]"
@@ -275,69 +276,72 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleAlergia")}
             />
-          </div>
+          )}
+
           {errors.detalleAlergia && (
             <p className="h-0 text-red-500">{errors.detalleAlergia.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Cicatrización</label>
+            <label className="text-2xl text-gray-900">Cicatrización</label>
             <select
               defaultValue={client?.cicatrizacion}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("cicatrizacion")}
               onBlur={() => handleBlur("cicatrizacion")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.cicatrizacion && (
             <p className="h-0 text-red-500">{errors.cicatrizacion.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Fiebre Reumática</label>
+            <label className="text-2xl text-gray-900">Fiebre Reumática</label>
             <select
               defaultValue={client?.fiebreReumatica}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("fiebreReumatica")}
               onBlur={() => handleBlur("fiebreReumatica")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.fiebreReumatica && (
             <p className="h-0 text-red-500">{errors.fiebreReumatica.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Diabetes</label>
+            <label className="text-2xl text-gray-900">Diabetes</label>
             <select
               defaultValue={client?.diabetes}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("diabetes")}
               onBlur={() => handleBlur("diabetes")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.diabetes && (
             <p className="h-0 text-red-500">{errors.diabetes.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Problemas Cardíacos</label>
+            <label className="text-2xl text-gray-900">
+              Problemas Cardíacos
+            </label>
             <select
               defaultValue={client?.problemasCardiacos}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("problemasCardiacos")}
               onBlur={() => handleBlur("problemasCardiacos")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.problemasCardiacos && (
@@ -346,74 +350,70 @@ const PatientMedicalHistory = () => {
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Aspirinas</label>
+            <label className="text-2xl text-gray-900">Aspirinas</label>
             <select
               defaultValue={client?.aspirinas}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("aspirinas")}
               onBlur={() => handleBlur("aspirinas")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.aspirinas && (
             <p className="h-0 text-red-500">{errors.aspirinas.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Anticoagulantes</label>
+            <label className="text-2xl text-gray-900">Anticoagulantes</label>
             <select
               defaultValue={client?.anticoagulante}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("anticoagulante")}
               onBlur={() => handleBlur("anticoagulante")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.anticoagulante && (
             <p className="h-0 text-red-500">{errors.anticoagulante.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Tabaquísmo</label>
+            <label className="text-2xl text-gray-900">Tabaquísmo</label>
             <select
               defaultValue={client?.tabaquismo}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("tabaquismo")}
               onBlur={() => handleBlur("tabaquismo")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.tabaquismo && (
             <p className="h-0 text-red-500">{errors.tabaquismo.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Embarazo</label>
+            <label className="text-2xl text-gray-900">Embarazo</label>
             <select
               defaultValue={client?.embarazo}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("embarazo")}
               onBlur={() => handleBlur("embarazo")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.embarazo && (
             <p className="h-0 text-red-500">{errors.embarazo.message}</p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+          {client.mesesEmbarazo && (
             <input
               defaultValue={client?.mesesEmbarazo}
               className="border p-2 rounded w-[17em]"
@@ -431,55 +431,55 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("mesesEmbarazo")}
             />
-          </div>
+          )}
           {errors.mesesEmbarazo && (
             <p className="h-0 text-red-500">{errors.mesesEmbarazo.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Hipertensión</label>
+            <label className="text-2xl text-gray-900">HipertenYesón</label>
             <select
-              defaultValue={client?.hipertension}
-              className="border p-2 rounded w-[4em]"
-              {...register("hipertension")}
-              onBlur={() => handleBlur("hipertension")}
+              defaultValue={client?.hipertenYeson}
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
+              {...register("hipertenYeson")}
+              onBlur={() => handleBlur("hipertenYeson")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
-          {errors.hipertension && (
-            <p className="h-0 text-red-500">{errors.hipertension.message}</p>
+          {errors.hipertenYeson && (
+            <p className="h-0 text-red-500">{errors.hipertenYeson.message}</p>
           )}
         </div>
         <div className=" p-4 flex flex-col gap-4 md:w-1/2 xs:w-full">
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Hipotensión</label>
+            <label className="text-2xl text-gray-900">HipotenYesón</label>
             <select
-              defaultValue={client?.hipotension}
-              className="border p-2 rounded w-[4em]"
-              {...register("hipotension")}
-              onBlur={() => handleBlur("hipotension")}
+              defaultValue={client?.hipotenYeson}
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
+              {...register("hipotenYeson")}
+              onBlur={() => handleBlur("hipotenYeson")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
-          {errors.hipotension && (
-            <p className="h-0 text-red-500">{errors.hipotension.message}</p>
+          {errors.hipotenYeson && (
+            <p className="h-0 text-red-500">{errors.hipotenYeson.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Problemas Renales</label>
+            <label className="text-2xl text-gray-900">Problemas Renales</label>
             <select
               defaultValue={client?.problemasRenales}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("problemasRenales")}
               onBlur={() => handleBlur("problemasRenales")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.problemasRenales && (
@@ -488,16 +488,18 @@ const PatientMedicalHistory = () => {
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Problemas Gástricos</label>
+            <label className="text-2xl text-gray-900">
+              Problemas Gástricos
+            </label>
             <select
               defaultValue={client?.problemasGastricos}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("problemasGastricos")}
               onBlur={() => handleBlur("problemasGastricos")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.problemasGastricos && (
@@ -505,11 +507,7 @@ const PatientMedicalHistory = () => {
               {errors.problemasGastricos.message}
             </p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+          {client.detalleGastricos && (
             <input
               defaultValue={client?.detalleGastricos}
               className="border p-2 rounded w-[17em]"
@@ -525,85 +523,79 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleGastricos")}
             />
-          </div>
+          )}
           {errors.detalleGastricos && (
             <p className="h-0 text-red-500">
               {errors.detalleGastricos.message}
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Convulsiones</label>
+            <label className="text-2xl text-gray-900">ConvulYesones</label>
             <select
-              defaultValue={client?.convulsiones}
-              className="border p-2 rounded w-[4em]"
-              {...register("convulsiones")}
-              onBlur={() => handleBlur("convulsiones")}
+              defaultValue={client?.convulYesones}
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
+              {...register("convulYesones")}
+              onBlur={() => handleBlur("convulYesones")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
-          {errors.convulsiones && (
-            <p className="h-0 text-red-500">{errors.convulsiones.message}</p>
+          {errors.convulYesones && (
+            <p className="h-0 text-red-500">{errors.convulYesones.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Epilepsia</label>
+            <label className="text-2xl text-gray-900">EpilepYesa</label>
             <select
-              defaultValue={client?.epilepsia}
-              className="border p-2 rounded w-[4em]"
-              {...register("epilepsia")}
-              onBlur={() => handleBlur("epilepsia")}
+              defaultValue={client?.epilepYesa}
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
+              {...register("epilepYesa")}
+              onBlur={() => handleBlur("epilepYesa")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
-          {errors.epilepsia && (
-            <p className="h-0 text-red-500">{errors.epilepsia.message}</p>
+          {errors.epilepYesa && (
+            <p className="h-0 text-red-500">{errors.epilepYesa.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">
-              Sifilis? Gonorrea? HIV?
-            </label>
+            <label className="text-2xl text-gray-900">HIV</label>
             <select
-              defaultValue={client?.sifilisGonorreaHIV}
-              className="border p-2 rounded w-[4em]"
-              {...register("sifilisGonorreaHIV")}
-              onBlur={() => handleBlur("sifilisGonorreaHIV")}
+              defaultValue={client?.YesfilisGoNorreaHIV}
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
+              {...register("YesfilisGoNorreaHIV")}
+              onBlur={() => handleBlur("YesfilisGoNorreaHIV")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
-          {errors.sifilisGonorreaHIV && (
+          {errors.YesfilisGoNorreaHIV && (
             <p className="h-0 text-red-500">
-              {errors.sifilisGonorreaHIV.message}
+              {errors.YesfilisGoNorreaHIV.message}
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Operaciones</label>
+            <label className="text-2xl text-gray-900">Operaciones</label>
             <select
               defaultValue={client?.operacion}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("operacion")}
               onBlur={() => handleBlur("operacion")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.operacion && (
             <p className="h-0 text-red-500">{errors.operacion.message}</p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+          {client.detalleOperacion && (
             <input
               defaultValue={client?.detalleOperacion}
               className="border p-2 rounded w-[17em]"
@@ -619,25 +611,25 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleOperacion")}
             />
-          </div>
+          )}
           {errors.detalleOperacion && (
             <p className="h-0 text-red-500">
               {errors.detalleOperacion.message}
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">
+            <label className="text-2xl text-gray-900">
               Problemas Respiratorios
             </label>
             <select
               defaultValue={client?.problemasRespiratorios}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("problemasRespiratorios")}
               onBlur={() => handleBlur("problemasRespiratorios")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.problemasRespiratorios && (
@@ -645,11 +637,7 @@ const PatientMedicalHistory = () => {
               {errors.problemasRespiratorios.message}
             </p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+          {client.detalleRespiratorios && (
             <input
               defaultValue={client?.detalleRespiratorios}
               className="border p-2 rounded w-[17em]"
@@ -665,33 +653,29 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleRespiratorios")}
             />
-          </div>
+          )}
           {errors.detalleRespiratorios && (
             <p className="h-0 text-red-500">
               {errors.detalleRespiratorios.message}
             </p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Tiroides</label>
+            <label className="text-2xl text-gray-900">Tiroides</label>
             <select
               defaultValue={client?.tiroides}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("tiroides")}
               onBlur={() => handleBlur("tiroides")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.tiroides && (
             <p className="h-0 text-red-500">{errors.tiroides.message}</p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+          {client.detalleTiroides && (
             <input
               defaultValue={client?.detalleTiroides}
               className="border p-2 rounded w-[17em]"
@@ -707,31 +691,27 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleTiroides")}
             />
-          </div>
+          )}
           {errors.detalleTiroides && (
             <p className="h-0 text-red-500">{errors.detalleTiroides.message}</p>
           )}
           <div className="flex items-center justify-between">
-            <label className="text-1xl text-white">Otros</label>
+            <label className="text-2xl text-gray-900">Otros</label>
             <select
               defaultValue={client?.otros}
-              className="border p-2 rounded w-[4em]"
+              className="border-2 border-gray-600 p-1 rounded-lg w-[5em] text-center"
               {...register("otros")}
               onBlur={() => handleBlur("otros")}
             >
               <option value="">-</option>
-              <option value={true}>SI</option>
-              <option value={false}>NO</option>
+              <option value={true}>Yes</option>
+              <option value={false}>No</option>
             </select>
           </div>
           {errors.otros && (
             <p className="h-0 text-red-500">{errors.otros.message}</p>
           )}
-          <div className="flex items-center justify-between">
-            <FontAwesomeIcon
-              icon={faQuestion}
-              className="text-1xl text-white"
-            />
+          {client.detalleOtros && (
             <input
               defaultValue={client?.detalleOtros}
               className="border p-2 rounded w-[17em]"
@@ -747,7 +727,7 @@ const PatientMedicalHistory = () => {
               })}
               onBlur={() => handleBlur("detalleOtros")}
             />
-          </div>
+          )}
           {errors.detalleOtros && (
             <p className="h-0 text-red-500">{errors.detalleOtros.message}</p>
           )}
@@ -755,24 +735,30 @@ const PatientMedicalHistory = () => {
       </div>
       <div className="px-5 w-full">
         <div className=" h-[8em] overflow-y-auto scrollbar-default flex items-center justify-between">
-          <label className="text-1xl text-white">
-            Al modificar esta información, declaro que todos los datos
-            proporcionados respecto a mi estado de salud son verdaderos y que he
-            comprendido todas las explicaciones que se me han facilitado en el
-            lenguaje claro y sencillo. Se me aclararon todas las dudas, por lo
-            que estoy completamente de acuerdo con los tratamientos que se me
-            van a realizar.
+          <label className=" text-1xl text-center text-gray-900 px-1">
+            <p className="hidden md:flex">
+              By modifying this information, I declare that all the data
+              provided regarding my health status is true and that I have
+              understood all the explanations given to me in clear and Yesmple
+              language. All my doubts have been clarified, so I fully agree with
+              the treatments that will be carried out on me.
+            </p>
+            <p className="flex md:hidden">
+              The individual affirms the accuracy of their health information,
+              understands explanations, and fully agrees with planned treatments
+              after having doubts clarified.
+            </p>
+            <input
+              className="border p-2 rounded w-full mt-3"
+              type="checkbox"
+              {...register("consentimiento", {
+                required: "Debe aceptar el consentimiento",
+              })}
+              defaultChecked={false}
+              onBlur={() => handleBlur("consentimiento")}
+              onClick={(e) => {}}
+            />
           </label>
-          <input
-            className="border p-2 rounded w-[17em]"
-            type="checkbox"
-            {...register("consentimiento", {
-              required: "Debe aceptar el consentimiento",
-            })}
-            defaultChecked={false}
-            onBlur={() => handleBlur("consentimiento")}
-            onClick={(e) => {}}
-          />
         </div>
         {errors.consentimiento && (
           <p className="h-0 text-red-500">{errors.consentimiento.message}</p>
@@ -780,7 +766,7 @@ const PatientMedicalHistory = () => {
       </div>
       <div className="flex justify-center mt-2">
         <button
-          className="font-bold w-[8em] border-none rounded-2xl my-5 py-3 bg-button-100 hover:bg-button-100/80 text-white text-2xl"
+          className="font-semibold w-[8em] ring-2 ring-icon-100 text-icon-100 hover:bg-icon-100 hover:text-white rounded-md my-5 py-3  text-2xl"
           type="submit"
           onClick={handleSubmit(onSubmit)}
         >

@@ -28,11 +28,11 @@ const PatientAppointment = () => {
   const onHandleDelete = async () => {
     const result = await Swal.fire({
       title:
-        "¿Estás segur@ que quieres eliminar este turno? Esta acción no se puede deshacer.",
+        "Are you sure you want to delete this product? This action cannot be undone.",
       icon: "question",
       showCancelButton: true,
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
       reverseButtons: true,
     });
     if (result.isConfirmed) {
@@ -51,7 +51,7 @@ const PatientAppointment = () => {
             >
               <div className="flex flex-col items-center">
                 <label className="text-black underline" htmlFor="">
-                  Fecha
+                  Date
                 </label>
                 <label className="text-white" htmlFor="">
                   {turno.fecha}
@@ -59,7 +59,7 @@ const PatientAppointment = () => {
               </div>
               <div className="flex flex-col items-center">
                 <label className="text-black underline" htmlFor="">
-                  Hora
+                  Time
                 </label>
                 <label className="text-white" htmlFor="">
                   {turno.hora}
@@ -76,7 +76,7 @@ const PatientAppointment = () => {
           ))
         ) : (
           <section className="bg-primary text-black text-xl shadow-sm shadow-black justify-evenly flex flex-row h-max w-[80%] rounded-lg py-2">
-            No hay turnos programados con este cliente.
+            There are no scheduled appointments with this client.
           </section>
         )}
       </div>

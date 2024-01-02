@@ -387,7 +387,7 @@ const PersonalDataForm = () => {
         </div>
         <div className="flex justify-center mt-2 ">
           <button
-            className="font-semibold w-[8em] border-none rounded-lg py-3 bg-icon-100 hover:bg-background-200 hover:ring-2 hover:ring-icon-100 hover:text-icon-100 text-white text-2xl"
+            className="font-semibold w-[8em] ring-2 ring-icon-100 text-icon-100 hover:bg-icon-100 hover:text-white rounded-md py-3  text-2xl"
             type="submit"
             onClick={handleSubmit(onSubmit)}
           >

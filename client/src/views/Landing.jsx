@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { FaTooth } from "react-icons/fa";
@@ -8,22 +8,26 @@ import hero from "../assets/dentista.avif";
 import hero2 from "../assets/login_image.avif";
 import hero3 from "../assets/hero_2.jpg";
 import circle from "../assets/Ellipse.svg";
+import { RiCloseFill, RiMenu3Fill } from "react-icons/ri";
+import LandingPageSideBar from "../components/LandingPageSideBar";
 
 const Landing = () => {
   return (
     <div className="flex flex-col h-[100vh] w-[100vw]">
       {/* Header */}
-      <div className=" flex justify-between text-[#f4f9ff] py-4 px-[11em] text-lg bg-gradient-to-r from-[#0E264B] to-[#3e66a1]">
-        <div className="flex justify-center gap-3 items-center">
+      <div className="w-full flex justify-between text-[#f4f9ff] py-2 md:py-4 md:px-[11em] text-lg bg-gradient-to-r from-[#0E264B] to-[#3e66a1]">
+        <div className="w-full flex md:justify-start justify-center items-center gap-3">
           <div className="text-white font-bold flex justify-center items-center">
             <CiLocationOn style={{ height: "30px", width: "30px" }} />
           </div>
           <p>Bronx, New York</p>
         </div>
-        <p>Monday to Friday 9:00 AM - 6:00 AM</p>
+        <p className="hidden md:flex justify-end w-full">
+          Monday to Friday 9:00 AM - 6:00 AM
+        </p>
       </div>
       {/* Navbar */}
-      <div className="py-6 flex justify-evenly bg-[#f4f9ff]">
+      <div className="hidden md:flex py-6 justify-evenly bg-[#f4f9ff]">
         {/* left */}
         <div className="flex items-center gap-8">
           <div className="flex justify-center items-center gap-3">
@@ -56,7 +60,7 @@ const Landing = () => {
       <div className="flex justify-center h-screen w-screen  pt-20 px-[8em] bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
         <div className="flex justify-start gap-10  ">
           {/* left */}
-          <div className="flex justify-center gap-14 w-[70%]">
+          <div className="hidden md:flex justify-center gap-14 w-[70%]">
             <div>
               <div className="flex gap-12 flex-col">
                 <img
@@ -95,17 +99,17 @@ const Landing = () => {
             </div>
           </div>
           {/* right */}
-          <div className="w-[40%] flex flex-col">
+          <div className="w-full md:w-[40%] flex flex-col ">
             <div className="w-[90%] flex flex-col gap-10">
-              <p className="text-[#f4f9ff] font-bold text-[6.7em] text-start leading-[1em]">
+              <p className="text-[#f4f9ff] font-bold text-[5em] md:text-[6.7em] text-center md:text-start leading-[1em]">
                 Smile better with us
               </p>
 
-              <p className="text-[#8b9fba] text-start text-md">
+              <p className="text-[#8b9fba] text-lg text-center md:text-start text-md">
                 We are dedicated to providing you and your family with
                 top-quality dental care in a confortabe and welcoming enviroment
               </p>
-              <div className="flex justify-between">
+              <div className="flex flex-col gap-6 md:flex-row justify-center items-center md:justify-between">
                 <Link
                   to="/register"
                   className="bg-blue-600 hover:bg-blue-700 text-white text-center self-center py-2 px-4 rounded-full hover:no-underline"
@@ -128,6 +132,7 @@ const Landing = () => {
           </div>
         </div>
       </div>
+      <LandingPageSideBar />
     </div>
   );
 };

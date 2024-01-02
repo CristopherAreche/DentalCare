@@ -64,10 +64,10 @@ const ClinicalHistory = () => {
   };
 
   return (
-    <div className="bg-secondary-100 h-full flex items-center justify-center">
-      <div className=" flex flex-col justify-center">
-        <form className=" bg-primary p-4 rounded-3xl shadow-2xl z-10 w-[90vw] lg:w-[50vw] h-full">
-          <h2 className="text-4xl font-bold text-center italic text-white mb-5">
+    <div className="flex justify-center items-center py-40 h-screen bg-gradient-to-r from-[#0E264B] to-[#496FAA]">
+      <div className=" flex flex-col justify-center w-full items-center">
+        <form className=" bg-white flex flex-col gap-6 p-4 rounded-3xl shadow-2xl z-10 w-[90vw] lg:w-[40vw] h-full">
+          <h2 className="text-4xl font-bold text-center italic text-gray-900 mb-5">
             Historial Médico
           </h2>
           <div className="flex flex-col justify-center gap-6">
@@ -77,7 +77,7 @@ const ClinicalHistory = () => {
                 <div className="flex flex-col gap-1">
                   <div className="flex flex-col w-full p-1 ">
                     <div className="flex self-center gap-12">
-                      <label className="text-1xl text-white">
+                      <label className="text-1xl text-gray-900">
                         Enfermedades
                       </label>
 
@@ -129,7 +129,7 @@ const ClinicalHistory = () => {
                 {/* Tratamiento Medico */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-3">
-                    <label className="text-1xl text-white">
+                    <label className="text-1xl text-gray-900">
                       Tratamiento Médico
                     </label>
                     <select
@@ -179,7 +179,7 @@ const ClinicalHistory = () => {
                 {/* Medicacion */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[4.5em]">
-                    <label className="text-1xl text-white">Médicacion</label>
+                    <label className="text-1xl text-gray-900">Médicacion</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -227,7 +227,7 @@ const ClinicalHistory = () => {
                 {/* Alergia */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[6.5em]">
-                    <label className="text-1xl text-white">Alergia</label>
+                    <label className="text-1xl text-gray-900">Alergia</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -275,7 +275,9 @@ const ClinicalHistory = () => {
                 {/* Cicatrizacion */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[4em]">
-                    <label className="text-1xl text-white">Cicatrización</label>
+                    <label className="text-1xl text-gray-900">
+                      Cicatrización
+                    </label>
                     <select
                       className="border rounded w-[3em]"
                       {...register("cicatrizacion", {
@@ -299,7 +301,7 @@ const ClinicalHistory = () => {
                 {/* Fiebre Reumatica */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-7">
-                    <label className="text-1xl text-white">
+                    <label className="text-1xl text-gray-900">
                       Fiebre Reumática
                     </label>
                     <select
@@ -326,7 +328,7 @@ const ClinicalHistory = () => {
                 {/* Diabetes */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[6em]">
-                    <label className="text-1xl text-white">Diabetes</label>
+                    <label className="text-1xl text-gray-900">Diabetes</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -351,7 +353,7 @@ const ClinicalHistory = () => {
                 {/* Problemas Cardiacos */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-3">
-                    <label className="text-1xl text-white">
+                    <label className="text-1xl text-gray-900">
                       Problemas Cardíacos
                     </label>
                     <select
@@ -378,7 +380,7 @@ const ClinicalHistory = () => {
                 {/* Aspirinas */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[6em]">
-                    <label className="text-1xl text-white">Aspirinas</label>
+                    <label className="text-1xl text-gray-900">Aspirinas</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -403,7 +405,7 @@ const ClinicalHistory = () => {
                 {/* Tabaquismo */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[5em]">
-                    <label className="text-1xl text-white">Tabaquismo</label>
+                    <label className="text-1xl text-gray-900">Tabaquismo</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -428,7 +430,7 @@ const ClinicalHistory = () => {
                 {/* Embarazo */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[5.5em]">
-                    <label className="text-1xl text-white">Embarazo</label>
+                    <label className="text-1xl text-gray-900">Embarazo</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -478,7 +480,9 @@ const ClinicalHistory = () => {
                 {/* Hipertension */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[4em]">
-                    <label className="text-1xl text-white">Hipertensión</label>
+                    <label className="text-1xl text-gray-900">
+                      Hipertensión
+                    </label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -503,7 +507,9 @@ const ClinicalHistory = () => {
                 {/* Hipotension */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[4.5em]">
-                    <label className="text-1xl text-white">Hipotensión</label>
+                    <label className="text-1xl text-gray-900">
+                      Hipotensión
+                    </label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -528,7 +534,7 @@ const ClinicalHistory = () => {
                 {/* Problemas Renales */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-5">
-                    <label className="text-1xl text-white">
+                    <label className="text-1xl text-gray-900">
                       Problemas Renales
                     </label>
                     <select
@@ -555,7 +561,7 @@ const ClinicalHistory = () => {
                 {/* Problemas Gastricos */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-2">
-                    <label className="text-1xl text-white">
+                    <label className="text-1xl text-gray-900">
                       Problemas Gástricos
                     </label>
                     <select
@@ -598,7 +604,9 @@ const ClinicalHistory = () => {
                 {/* Convulsiones */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-16">
-                    <label className="text-1xl text-white">Convulsiones</label>
+                    <label className="text-1xl text-gray-900">
+                      Convulsiones
+                    </label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -623,7 +631,7 @@ const ClinicalHistory = () => {
                 {/* Epilepsia */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[6em]">
-                    <label className="text-1xl text-white">Epilepsia</label>
+                    <label className="text-1xl text-gray-900">Epilepsia</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -648,7 +656,7 @@ const ClinicalHistory = () => {
                 {/* Sifilis */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-2">
-                    <label className="text-1xl text-white">
+                    <label className="text-1xl text-gray-900">
                       Sífilis, Gonorrea, VIH
                     </label>
                     <select
@@ -675,7 +683,7 @@ const ClinicalHistory = () => {
                 {/* Operaciones */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-[5.5em]">
-                    <label className="text-1xl text-white">Operación</label>
+                    <label className="text-1xl text-gray-900">Operación</label>
                     <select
                       className="border rounded w-[3em]"
                       onChange={handleChange}
@@ -716,7 +724,7 @@ const ClinicalHistory = () => {
                 {/* Problemas Respiratorios */}
                 <div className="flex flex-col gap-1">
                   <div className="flex self-center gap-3">
-                    <label className="text-1xl text-white">
+                    <label className="text-1xl text-gray-900">
                       Problemas Respiratorios
                     </label>
                     <select
@@ -759,8 +767,8 @@ const ClinicalHistory = () => {
               </div>
             </div>
             <div className="flex flex-col items-center px-5">
-              <div className="flex items-center">
-                <label className="text-1xl text-white">
+              <div className="flex flex-col items-center">
+                <label className="text-1xl text-center px-3 text-gray-900 mb-2">
                   Al registrarme, declaro que todos los datos proporcionados
                   respecto a mi estado de salud son verdaderos y que he
                   comprendido todas las explicaciones que se me han facilitado
@@ -790,7 +798,7 @@ const ClinicalHistory = () => {
           </div>
           <div className="flex justify-center">
             <button
-              className="font-bold w-[8em] border-none rounded-2xl py-3 bg-button-100 hover:bg-button-100/80 text-white text-2xl"
+              className="font-bold w-[8em] border-none rounded-md py-3 ring-2 ring-icon-100 text-icon-100 hover:bg-icon-100 hover:text-white text-2xl"
               type="submit"
               onClick={handleSubmit(onSubmit)}
             >

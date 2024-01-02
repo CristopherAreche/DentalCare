@@ -73,18 +73,18 @@ const AppointmentUser = () => {
 
     if (userAppointments.length > 0) {
       await Swal.fire({
-        title: `Usted ya tiene un turno asignado! Revise su casilla de mail`,
+        title: `You already have an assigned appointment! Please check your email inbox.`,
         icon: "warning",
         showCancelButton: false,
         confirmButtonText: "OK",
       });
     } else {
       const result = await Swal.fire({
-        title: `¿Confirma el turno con fecha ${date} y hora ${time}?`,
+        title: `Do you confirm the appointment for the date ${date} and time ${time}?`,
         icon: "question",
         showCancelButton: true,
-        confirmButtonText: "Sí, reservar",
-        cancelButtonText: "Cancelar",
+        confirmButtonText: "Yes",
+        cancelButtonText: "Cancel",
         reverseButtons: true,
       });
       if (result.isConfirmed) {
@@ -105,10 +105,10 @@ const AppointmentUser = () => {
             });
 
             const calendar = await Swal.fire({
-              title: `¿Quieres agendar este turno en Google calendar?`,
+              title: `Do you want to schedule this appointment on Google Calendar?`,
               icon: "question",
               showCancelButton: true,
-              confirmButtonText: "Sí, agendar",
+              confirmButtonText: "Yes",
               cancelButtonText: "No",
               reverseButtons: true,
             });
@@ -117,7 +117,7 @@ const AppointmentUser = () => {
               window.open("https://calendar.google.com/calendar/", "_blank");
               Toast.fire({
                 icon: "success",
-                title: "Turno reservado con éxito ",
+                title: "Appointment successfully reserved",
               });
             }
           })
@@ -137,7 +137,7 @@ const AppointmentUser = () => {
 
             Toast.fire({
               icon: "error",
-              title: "Error al confirmar la reserva!",
+              title: "Error confirming the reservation!",
             });
           });
       }
@@ -147,8 +147,7 @@ const AppointmentUser = () => {
   const handleDelete = async (appointment) => {
     if (appointment.fecha === currentDateISO && currentTime >= 11) {
       await Swal.fire({
-        title:
-          "No se pueden cancelar turnos pasadas las 11hs de la misma fecha",
+        title: "Appointments cannot be canceled after 11 AM on the same date.",
         icon: "error",
         showCancelButton: false,
         confirmButtonText: "OK",
@@ -156,10 +155,10 @@ const AppointmentUser = () => {
       });
     } else {
       const result = await Swal.fire({
-        title: "¿Quieres cancelar este turno?",
+        title: "Would you like to cancel this appointment?",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Sí, Cancelar",
+        confirmButtonText: "Yes",
         cancelButtonText: "No",
         reverseButtons: true,
       });
@@ -210,7 +209,7 @@ const AppointmentUser = () => {
           </div>
         ))}
       </ul>
-      <ul className="flex flex-col justify-center items-center mt-4 text-white h-[10em] w-full rounded-lg lg:rounded-2xl py-5 px-3 overflow-y-auto scrollbar-hide">
+      <ul className="flex flex-col justify-center items-center mt-4 text-white h-[10em] w-full rounded-lg lg:rounded-2xl py-5 px-[20em] overflow-y-auto scrollbar-hide">
         {userAppointments.length == 0 ? (
           <span className="text-2xl text-center">
             No appointment has been scheduled
@@ -218,17 +217,19 @@ const AppointmentUser = () => {
         ) : (
           <li
             key={userAppointments[0]?.id}
-            className=" font-semibold mb-4 shadow-md bg-primary py-2 rounded-lg px-3 flex lg:justify-evenly lg:flex-row flex-col w-80 lg:w-full items-center"
+            className="px-3 font-semibold mb-4 shadow-md bg-background-200 py-2 rounded-lg flex lg:justify-evenly md:flex-row  w-80 lg:w-full items-center"
           >
-            <div>{userAppointments[0]?.pacienteId}</div>
-            <div>{userAppointments[0].fecha}</div>
-            <div>{userAppointments[0].hora}</div>
+            <div className="text-lg">Your next appointment is: </div>
+            <div className="w-1/2">
+              <div>{userAppointments[0].fecha}</div>
+              <div>{userAppointments[0].hora}</div>
+            </div>
             <button
               value={userAppointments[0].id}
               onClick={() => handleDelete(userAppointments[0])}
             >
               <FontAwesomeIcon
-                className="h-[1.5em] text-red-600 cursor-pointer"
+                className="h-[1.5em] text-red-500 hover:text-red-600 flex cursor-pointer"
                 icon={faCircleXmark}
               />
             </button>

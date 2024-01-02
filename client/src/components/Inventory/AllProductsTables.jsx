@@ -39,11 +39,11 @@ const AllProductsTables = ({ productos, handleEdit }) => {
           const onHandleDelete = async () => {
             const result = await Swal.fire({
               title:
-                "¿Estás segur@ que quieres eliminar este producto? Esta acción no se puede deshacer.",
+                "Are you sure you want to delete this product? This action cannot be undone.",
               icon: "question",
               showCancelButton: true,
-              confirmButtonText: "Sí, eliminar",
-              cancelButtonText: "Cancelar",
+              confirmButtonText: "Yes",
+              cancelButtonText: "Cancel",
               reverseButtons: true,
             });
             if (result.isConfirmed) {
@@ -96,34 +96,37 @@ const AllProductsTables = ({ productos, handleEdit }) => {
         </thead>
         {/* datos */}
         <tbody {...getTableBodyProps()}>
-  {productos.length === 0 ? (
-    <tr>
-      <td className="bg-white items-center text-center m-auto" colSpan={columns.length}>
-        No se encontraron productos
-      </td>
-    </tr>
-  ) : (
-    rows.map((row) => {
-      prepareRow(row);
-      return (
-        <tr {...row.getRowProps()}>
-          {row.cells.map((cell, index) => {
-            return (
+          {productos.length === 0 ? (
+            <tr>
               <td
-                {...cell.getCellProps()}
-                className={`bg-slate-300 py-2 px-4 border-b  text-sm ${
-                  index !== row.cells.length - 1 ? "border-r" : ""
-                }`}
+                className="bg-white items-center text-center m-auto"
+                colSpan={columns.length}
               >
-                {cell.render("Cell")}
+                No se encontraron productos
               </td>
-            );
-          })}
-        </tr>
-      );
-    })
-  )}
-</tbody>
+            </tr>
+          ) : (
+            rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell, index) => {
+                    return (
+                      <td
+                        {...cell.getCellProps()}
+                        className={`bg-slate-300 py-2 px-4 border-b  text-sm ${
+                          index !== row.cells.length - 1 ? "border-r" : ""
+                        }`}
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })
+          )}
+        </tbody>
       </table>
     </div>
   );

@@ -36,7 +36,7 @@ function DateFilter({ onSelect, handlePost, handleSelectChanged }) {
         selected={startDate}
         onChange={handleValueChange}
         isClearable
-        placeholderText="Agregar una fecha"
+        placeholderText="Choose Date"
         className="text-center py-2 rounded-lg"
         minDate={new Date()}
         dateFormat="dd/MM/yyy"
@@ -44,12 +44,12 @@ function DateFilter({ onSelect, handlePost, handleSelectChanged }) {
       />
       <div className="flex gap-4">
         <select
-          className="bg-secondary-100 text-white py-2 px-3 rounded-lg"
+          className="ring-1 ring-icon-100 bg-transparent text-white py-2 px-1 rounded-lg"
           defaultValue={"Hora"}
           onChange={handleSelectChanged}
         >
           <option value={"Hora"} disabled>
-            Hora
+            Time
           </option>
           {findDate?.horasDisponibles.map((hourData) => (
             <option
@@ -69,7 +69,7 @@ function DateFilter({ onSelect, handlePost, handleSelectChanged }) {
           }}
         >
           <FontAwesomeIcon
-            className="h-[2.5em] text-green-800 bg-white rounded-full"
+            className="h-[2em] text-green-600 hover:text-green-400 rounded-full"
             icon={faCircleCheck}
           />
         </button>

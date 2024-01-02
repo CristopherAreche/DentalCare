@@ -55,11 +55,11 @@ const ClientTable = ({ searchTerm }) => {
           const onHandleDelete = async () => {
             const result = await Swal.fire({
               title:
-                "¿Estás segur@ que quieres eliminar este paciente? Esta acción no se puede deshacer.",
+                "Are you sure you want to delete this patient? This action cannot be undone.",
               icon: "question",
               showCancelButton: true,
-              confirmButtonText: "Sí, eliminar",
-              cancelButtonText: "Cancelar",
+              confirmButtonText: "Yes",
+              cancelButtonText: "Cancel",
               reverseButtons: true,
             });
             if (result.isConfirmed) {
@@ -130,7 +130,7 @@ const ClientTable = ({ searchTerm }) => {
           ) : (
             <tr>
               <td className="text-white" colSpan={columns.length}>
-                No se encontraron clientes
+                No clients were found.
               </td>
             </tr>
           )}

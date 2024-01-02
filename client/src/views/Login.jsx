@@ -53,12 +53,12 @@ const Login = () => {
   return (
     <div className="py-40 min-h-screen bg-gradient-to-r from-[#0E264B] to-[#496FAA]">
       <div className="container mx-auto">
-        <div className="flex w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
+        <div className="flex w-[90vw] md:w-8/12 bg-white rounded-xl mx-auto shadow-lg overflow-hidden">
           <div
-            className="w-1/2 flex flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center"
+            className="hidden md:w-1/2 md:flex flex-col items-center justify-center p-12 bg-no-repeat bg-cover bg-center"
             style={{ backgroundImage: `url(${loginImage})` }}
           />
-          <div className="w-1/2 py-16 px-10">
+          <div className="w-full md:w-1/2 py-16 px-10">
             <Link
               to={"/"}
               className="flex gap-2 text-black mb-3 w-full justify-end"
@@ -102,13 +102,13 @@ const Login = () => {
                 {showPassword ? (
                   <FontAwesomeIcon
                     icon={faEye}
-                    className="absolute  top-[0.6em] left-[15.5em] transform -translate-y-1/3 text-xl cursor-pointer text-gray-400"
+                    className="absolute  top-[0.6em] left-[12em] md:left-[15.5em] transform -translate-y-1/3 text-xl cursor-pointer text-gray-400"
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 ) : (
                   <FontAwesomeIcon
                     icon={faEyeSlash}
-                    className="absolute top-[0.6em] left-[15.5em] transform -translate-y-1/3 text-xl cursor-pointer text-gray-500"
+                    className="absolute top-[0.6em] left-[12em] md:left-[15.5em] transform -translate-y-1/3 text-xl cursor-pointer text-gray-500"
                     onClick={() => setShowPassword(!showPassword)}
                   />
                 )}

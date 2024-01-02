@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  dental_care_app:
+    container_name: dental_care_app
+    build: .
+    image: cristopher/dental_care_backend
+    ports:
+      - "3000:3000"
+    environment:
+      - PG_DB=dental_care_db
+      - PG_USER=cristopher
+      - PG_PASSWORD=12345
+      - PG_HOST=dental_care_db
+    depends_on:
+      - dental_care_db
+    restart: always
+
+  dental_care_db:
+    container_name: dental_care_db
+    image: postgres:12
+    ports:
+      - "5438:5438"
+    environment:
+      - POSTGRES_DB=dental_care_db
+      - POSTGRES_USER=cristopher
+      - POSTGRES_PASSWORD=12345

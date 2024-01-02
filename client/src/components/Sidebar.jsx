@@ -39,6 +39,7 @@ const SidebarLink = ({ item }) => {
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userType = useSelector((state) => state.users.type);
+
   const dni = useSelector((state) => state.users.users);
   const onLogout = () => {
     const cookie = new Cookie();
@@ -63,7 +64,7 @@ const Sidebar = () => {
           <span className="text-gray-900 text-3xl font-bold">Dental Care</span>
         </div>
         <div className="flex-1 py-8 flex flex-col gap-0.5">
-          {userType === true
+          {userType
             ? DASHBOARD_SIDEBAR_LINKS.map((item) => (
                 <SidebarLink key={item.key} item={item} />
               ))

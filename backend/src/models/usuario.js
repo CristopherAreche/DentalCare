@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/config.cjs";
+import sequelize from "../utils/database.js";
 import Paciente from "./paciente.js";
 
 const Usuario = sequelize.define(

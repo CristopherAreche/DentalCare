@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/config.cjs";
+import sequelize from "../utils/database.js";
 
 const Diente = sequelize.define("Diente", {
   numero: {
@@ -38,7 +38,8 @@ const Diente = sequelize.define("Diente", {
     allowNull: true,
     defaultValue: null,
   },
-  prestacion: {  // Agregamos la propiedad 'prestacion'
+  prestacion: {
+    // Agregamos la propiedad 'prestacion'
     type: DataTypes.STRING,
     allowNull: true,
     defaultValue: null,

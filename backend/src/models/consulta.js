@@ -1,5 +1,5 @@
 import { DataTypes, UUIDV4 } from "sequelize";
-import sequelize from "../config/config.cjs";
+import sequelize from "../utils/database.js";
 import Odontograma from "./odontograma.js";
 import Producto from "./producto.js";
 

@@ -36,7 +36,6 @@ const AppoinmentList = ({ setStartDate, startDate }) => {
     return a.fecha >= currentDateISO;
   });
 
-
   //eliminacion de turnos antiguos pasados los 2 meses
   appointments.map(async (a) => {
     const [day, month, year] = a.fecha.split("/");
@@ -139,11 +138,11 @@ const AppoinmentList = ({ setStartDate, startDate }) => {
 
   const handleDelete = async (id) => {
     const result = await Swal.fire({
-      title: "¿Quieres eliminar este turno?",
+      title: "Do you want to delete this appointment?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
+      confirmButtonText: "Yes",
+      cancelButtonText: "Cancel",
       reverseButtons: true,
     });
     if (result.isConfirmed) {
@@ -167,10 +166,10 @@ const AppoinmentList = ({ setStartDate, startDate }) => {
   }, [list]);
 
   return (
-    <div className="flex flex-col lg:mx-[15vw] mx-4  h-[40em]">
+    <div className="flex flex-col h-[40em]">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col lg:w-full lg:flex-row bg-primary py-3 px-3 rounded-lg gap-3 justify-evenly items-center"
+        className="flex flex-col lg:w-full lg:flex-row bg-background-100 py-3 px-3 rounded-lg gap-3 justify-evenly items-center"
       >
         <input
           type="number"
@@ -194,20 +193,20 @@ const AppoinmentList = ({ setStartDate, startDate }) => {
           handleSelectChanged={handleSelectChanged}
         />
       </form>
-      <ul className=" flex flex-col items-center mt-4 bg-gray-300 text-black h-[30em] w-full rounded-lg lg:rounded-2xl py-5 px-3 overflow-y-auto scrollbar-hide">
+      <ul className=" flex flex-col items-center mt-4 bg-white text-black h-[30em] w-full rounded-md lg:rounded-md py-5 px-3 overflow-y-auto scrollbar-hide">
         {currentAppointments.length > 0 ? (
           currentAppointments.map((item, index) => (
             <li
               key={index}
-              className=" font-semibold mb-4 shadow-md bg-primary py-2 rounded-lg px-3 flex lg:justify-evenly lg:flex-row flex-col w-80 lg:w-full items-center"
+              className="px-8 font-semibold mb-4 shadow-md bg-background-200 py-2 rounded-lg  flex lg:justify-between lg:flex-row flex-col w-80 lg:w-full items-center"
             >
-              <div>{item?.pacienteId}</div>
-              <div>
+              <div className="text-white">{item?.pacienteId}</div>
+              <div className="text-white">
                 {item?.paciente?.nombre} {item?.paciente?.apellido}
               </div>
 
-              <div>{item.fecha}</div>
-              <div>{item.hora}</div>
+              <div className="text-white">{item.fecha}</div>
+              <div className="text-white">{item.hora}</div>
               <button value={item.id} onClick={() => handleDelete(item.id)}>
                 <FontAwesomeIcon
                   className="h-[1.5em] text-red-600 cursor-pointer"
