@@ -183,7 +183,11 @@ const AppoinmentList = ({ setStartDate, startDate }) => {
         />
         <div className="w-[18em] text-center">
           <p className="text-white  text-2xl w-auto">
-            {searchResult.length > 0 && <span>{searchResult}</span>}
+            {searchResult.length > 0 ? (
+              <span>{searchResult}</span>
+            ) : (
+              <span>Patient Name</span>
+            )}
           </p>
         </div>
 

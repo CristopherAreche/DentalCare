@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bottonWave from "../../assets/botton_wave.png";
-import topWave from "../../assets/topwave.png";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faIdCard } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import axios from "axios";
