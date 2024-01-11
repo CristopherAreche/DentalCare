@@ -6,7 +6,7 @@ import { PiTooth } from "react-icons/pi";
 
 const SectionOne = () => {
   return (
-    <div className="flex flex-col md:flex-row justify-center max-w-screen md:h-screen  pt-20 px-10 text-center md:text-start md:px-[8em] bg-background-300">
+    <div className="flex flex-col md:flex-row justify-center max-w-screen md:h-auto  py-20 px-10 text-center md:text-start md:px-[8em] bg-background-300">
       {/* left side */}
       <div className="flex flex-col gap-8 w-full md:w-1/2">
         <h1 className="text-[3em] md:text-[5em] font-bold text-background-100 leading-[1em]">

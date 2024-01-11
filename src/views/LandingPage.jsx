@@ -5,6 +5,10 @@ import HeroSection from "../components/LandingPage/HeroSection";
 import SectionOne from "../components/LandingPage/SectionOne";
 import LandingPageSideBar from "../components/LandingPage/LandingPageSideBar";
 import SectionTwo from "../components/LandingPage/SectionTwo";
+import SectionThree from "../components/LandingPage/SectionThree";
+import SectionFour from "../components/LandingPage/SectionFour";
+import SectionFive from "../components/LandingPage/SectionFive";
+import Footer from "../components/LandingPage/Footer";
 
 const LandingPage = () => {
   return (
@@ -14,6 +18,10 @@ const LandingPage = () => {
       <HeroSection />
       <SectionOne />
       <SectionTwo />
+      <SectionThree />
+      <SectionFour />
+      <SectionFive />
+      <Footer />
 
       <LandingPageSideBar />
     </div>
