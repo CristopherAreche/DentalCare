@@ -20,19 +20,19 @@ library.add(
 export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: "citas",
-    label: "Citas",
+    label: "Appointments",
     path: "/citas",
     icon: <FontAwesomeIcon icon={faChartSimple} />,
   },
   {
     key: "inventario",
-    label: "Inventario",
+    label: "Inventory",
     path: "/inventario",
     icon: <FontAwesomeIcon icon={faBoxesStacked} />,
   },
   {
     key: "pacientes",
-    label: "Pacientes",
+    label: "Patients",
     path: "/pacientes",
     icon: <FontAwesomeIcon icon={faUsers} />,
   },

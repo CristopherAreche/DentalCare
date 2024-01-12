@@ -12,27 +12,27 @@ const AllProductsTables = ({ productos, handleEdit }) => {
   const columns = useMemo(
     () => [
       {
-        Header: "Nombre",
+        Header: "Name",
         accessor: "nombre",
       },
       {
-        Header: "Cantidad",
+        Header: "Quantity",
         accessor: "cantidad",
       },
       {
-        Header: "Lote",
+        Header: "ID #",
         accessor: "lote",
       },
       {
-        Header: "Fecha de vencimiento",
+        Header: "Exp Date",
         accessor: "vencimiento",
       },
       {
-        Header: "Stock Minimo",
+        Header: "Min Stock",
         accessor: "stockMinimo",
       },
       {
-        Header: "",
+        Header: "edit / del",
         accessor: "id",
         Cell: ({ value, row }) => {
           const dispatch = useDispatch();
@@ -55,11 +55,11 @@ const AllProductsTables = ({ productos, handleEdit }) => {
           };
           return (
             <>
-              <div className="flex flex-row gap-3">
-                <button onClick={onHandleEdit} className="text-blue-700">
+              <div className="flex flex-row justify-evenly gap-3">
+                <button onClick={onHandleEdit} className="text-gray-700">
                   <FontAwesomeIcon icon={faEdit} />
                 </button>
-                <button onClick={onHandleDelete} className="text-red-600">
+                <button onClick={onHandleDelete} className="text-gray-600">
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
               </div>
@@ -77,7 +77,7 @@ const AllProductsTables = ({ productos, handleEdit }) => {
     tableInstance;
 
   return (
-    <div className="h-[21em] w-full overflow-y-scroll scrollbar-thumb-primary scrollbar-rounded-full rounded-md scrollbar-track-slate-300 scrollbar-thin scrollbar-hide">
+    <div className="h-auto max-h-[28em] w-full overflow-y-scroll scrollbar-thumb-primary scrollbar-rounded-full rounded-md scrollbar-track-slate-300 scrollbar-thin scrollbar-hide">
       <table {...getTableProps()} className="border-collapse w-full">
         {/* headers */}
         <thead className="sticky top-0 rounded-md">
@@ -86,7 +86,7 @@ const AllProductsTables = ({ productos, handleEdit }) => {
               {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps()}
-                  className="py-2 px-4 bg-primary text-white font-medium uppercase text-sm"
+                  className="py-2 px-4 bg-background-100 text-white text-xl font-medium uppercase"
                 >
                   {column.render("Header")}
                 </th>
@@ -99,10 +99,10 @@ const AllProductsTables = ({ productos, handleEdit }) => {
           {productos.length === 0 ? (
             <tr>
               <td
-                className="bg-white items-center text-center m-auto"
+                className="bg-white items-center text-center m-auto border-gray-500"
                 colSpan={columns.length}
               >
-                No se encontraron productos
+                No product has been added.
               </td>
             </tr>
           ) : (
@@ -114,7 +114,7 @@ const AllProductsTables = ({ productos, handleEdit }) => {
                     return (
                       <td
                         {...cell.getCellProps()}
-                        className={`bg-slate-300 py-2 px-4 border-b  text-sm ${
+                        className={`bg-white py-2 text-lg px-4${
                           index !== row.cells.length - 1 ? "border-r" : ""
                         }`}
                       >

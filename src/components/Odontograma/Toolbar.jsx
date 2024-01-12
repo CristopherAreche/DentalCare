@@ -17,6 +17,7 @@ const Toolbar = (props) => {
     <div className="flex flex-wrap gap-2 w-full justify-evenly py-3">
       {props?.toolbar?.opcoes.map((item) => {
         let colors = item?.cor;
+        console.log(colors);
         let nome = item?.nome;
 
         const buttonStyle = {
@@ -28,12 +29,11 @@ const Toolbar = (props) => {
           <button
             type="primary"
             key={nome}
-            className={`bt-toolbar text-black bg-${colors}-500 py-2 px-3 rounded-lg`}
+            className={`bt-toolbar text-black bg-${colors}-400 py-2 px-3 rounded-lg`}
             style={buttonStyle}
             onClick={() => handleButtonClick(colors, nome)}
           >
             <p>{nome}</p>
-            <p className={`rounded-full p-2 bg-${colors}-700`}></p>
           </button>
         );
       })}

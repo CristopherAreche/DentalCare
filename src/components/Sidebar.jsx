@@ -17,7 +17,7 @@ import { FaTooth } from "react-icons/fa";
 library.add(faArrowRightFromBracket);
 
 const linkClasses =
-  "flex items-center gap-2 font-light transition-all duration-200 ease-in-out px-3 py-2 hover:bg-icon-100 hover:no-underline text-base hover:text-white mx-1";
+  "flex items-center gap-2 font-light transition-all duration-200 ease-in-out px-3 py-2 hover:bg-[#17345c] hover:no-underline text-base hover:text-white mx-1";
 
 const SidebarLink = ({ item }) => {
   const { pathname } = useLocation();
@@ -26,7 +26,9 @@ const SidebarLink = ({ item }) => {
     <Link
       to={item.path}
       className={classNames(
-        pathname === item.path ? "text-white bg-icon-100" : "text-gray-900",
+        pathname === item.path
+          ? "text-white text-xl font-semibold bg-[#17345c]"
+          : "text-gray-900 text-xl font-semibold",
         linkClasses
       )}
     >
@@ -63,7 +65,7 @@ const Sidebar = () => {
           </div>
           <span className="text-gray-900 text-3xl font-bold">Dental Care</span>
         </div>
-        <div className="flex-1 py-8 flex flex-col gap-0.5">
+        <div className="flex-1 py-8 flex flex-col gap-4">
           {userType
             ? DASHBOARD_SIDEBAR_LINKS.map((item) => (
                 <SidebarLink key={item.key} item={item} />
@@ -74,7 +76,10 @@ const Sidebar = () => {
         </div>
         <div className="flex flex-col gap-0.5 pt-2 mb-10">
           <button
-            className={classNames("text-red-500 cursor-pointer", linkClasses)}
+            className={classNames(
+              "text-red-500 text-lg font-semibold cursor-pointer",
+              linkClasses
+            )}
             onClick={onLogout}
           >
             <span className="text-xl">

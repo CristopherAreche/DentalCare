@@ -13,14 +13,14 @@ const MedicalHistory = () => {
     setIsModalOpen(false);
   };
   return (
-    <div className="bg-[#012542] flex flex-col gap-4 justify-center items-center h-[69vh] text-lg text-white font-bold py-4 px-1 lg:px-4">
+    <div className="bg-white flex flex-col items-center justify-center gap-3 h-[600px] text-lg text-white font-bold py-4 overflow-y-auto">
       <MedicalHistoryForm isModalOpen={isModalOpen} />
       <div className="justify-center flex">
         <button
           onClick={handleOpenModal}
-          className="bg-green-700 hover:bg-green-500 py-2 px-4 rounded-lg"
+          className="bg-green-700 hover:bg-green-500 py-2 px-8 rounded-md uppercase"
         >
-          Editar
+          Edit
         </button>
         <ModalH isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>

@@ -7,11 +7,11 @@ const Store = {
     opcoes: [
       {
         nome: "Restaurado",
-        cor: "pink",
+        cor: "blue",
       },
       {
         nome: "Caríado",
-        cor: "green",
+        cor: "blue",
       },
       {
         nome: "Hígido",
@@ -19,15 +19,15 @@ const Store = {
       },
       {
         nome: "Obturacion",
-        cor: "yellow",
+        cor: "red",
       },
       {
         nome: "Corona",
-        cor: "yellow",
+        cor: "red",
       },
       {
         nome: "Implante Dental",
-        cor: "purple",
+        cor: "blue",
       },
     ],
   },

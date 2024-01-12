@@ -125,14 +125,18 @@ const MedicalHistoryForm = ({ isModalOpen, setIsModalOpen }) => {
 
   const Pregunta = ({ pregunta, valor }) => (
     <div className="flex justify-between mb-3">
-      <p className="">{pregunta}</p>
-      {valor ? <p>Si</p> : <p>No</p>}
+      <p className="text-background-100">{pregunta}</p>
+      {valor ? (
+        <p className="text-gray-600">Si</p>
+      ) : (
+        <p className="text-gray-600">No</p>
+      )}
     </div>
   );
 
   const PreguntaConDetalle = ({ pregunta, valor, detalle }) => (
     <div className="flex justify-between mb-3">
-      <p>{pregunta}</p>
+      <p className="bg-background-100">{pregunta}</p>
       {valor ? (
         <>
           <p>{detalle}</p>
@@ -150,7 +154,7 @@ const MedicalHistoryForm = ({ isModalOpen, setIsModalOpen }) => {
           <Formik initialValues={paciente}>
             {({ values }) => (
               <div className="flex flex-col items-center flex-end w-full gap-5">
-                <Form className=" lg:w-[70%] w-[95%] h-[25em] overflow-y-auto p-5 shadow-2xl rounded-lg bg-[#14212a] scrollbar-hide">
+                <Form className=" lg:w-[30em] w-[95%] h-[25em] overflow-y-auto p-5 rounded-md ring-2 ring-[#14212a] scrollbar-hide">
                   {preguntas?.map((preguntaObj, index) => {
                     const { campo, pregunta, detalle } = preguntaObj;
                     const valor = values[campo];
@@ -181,7 +185,7 @@ const MedicalHistoryForm = ({ isModalOpen, setIsModalOpen }) => {
           />
         </>
       ) : (
-        <div>Aun no posee un historial medico</div>
+        <div className="text-black">Does not has a Medical History</div>
       )}
     </>
   );

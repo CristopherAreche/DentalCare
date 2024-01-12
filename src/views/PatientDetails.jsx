@@ -17,11 +17,11 @@ const PatientDetails = () => {
       <div className="lg:w-[20%] m-0 z-50">
         <Sidebar />
       </div>
-      <div className="bg-secondary-100 flex flex-col h-[100vh] w-[100vw] justify-center items-center gap-3  mx-4">
-        <header className="text-[#FB8C00] text-3xl font-bold lg:pt-0">
+      <div className="w-[80%] h-auto bg-gradient-to-r from-[#0E264B] to-[#3e66a1] flex flex-col justify-center items-center gap-3">
+        <header className="text-white uppercase text-3xl font-bold lg:pt-0">
           {selectedClient?.data.nombre + " " + selectedClient?.data.apellido}
         </header>
-        <div className="w-[100%] lg:w-[90%]">
+        <div className="w-full px-10">
           <PatientMenu />
         </div>
       </div>

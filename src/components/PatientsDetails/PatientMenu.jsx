@@ -7,8 +7,8 @@ import MedicalHistory from "./Options/MedicalHistory";
 const Option = ({ title, active, onClick }) => {
   return (
     <button
-      className={`px-2 lg:px-4 w-[100%] py-2 lg:text-lg ${
-        active ? "bg-[#012542] text-white" : "text-gray-600 bg-[#14212A]"
+      className={`px-2 lg:px-4 w-[100%] py-2 lg:text-lg font-bold uppercase ${
+        active ? "bg-white text-background-100" : "text-white bg-background-100"
       }`}
       onClick={onClick}
     >
@@ -39,22 +39,22 @@ const PatientMenu = () => {
     <div>
       <div className="flex lg:justify-start justify-center mt-4">
         <Option
-          title="Detalles"
+          title="Details"
           active={activeOption === "details"}
           onClick={() => setActiveOption("details")}
         />
         <Option
-          title="Odontograma"
+          title="Odontogram"
           active={activeOption === "map"}
           onClick={() => setActiveOption("map")}
         />
         <Option
-          title="Citas"
+          title="Appointments"
           active={activeOption === "summary"}
           onClick={() => setActiveOption("summary")}
         />
         <Option
-          title="Historial Medico"
+          title="Medical History"
           active={activeOption === "profile"}
           onClick={() => setActiveOption("profile")}
         />

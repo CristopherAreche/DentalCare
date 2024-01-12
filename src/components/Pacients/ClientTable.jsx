@@ -25,7 +25,7 @@ const ClientTable = ({ searchTerm }) => {
         accessor: "dni",
       },
       {
-        Header: "Nombre",
+        Header: "Name",
         accessor: "nombre",
         Cell: ({ row }) => {
           const onPacientInfo = () => {
@@ -45,10 +45,11 @@ const ClientTable = ({ searchTerm }) => {
         },
       },
       {
-        Header: "Celular",
+        Header: "Phone Number",
         accessor: "telefono1",
       },
       {
+        Header: "Remove",
         accessor: "opciones",
         Cell: ({ row }) => {
           const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const ClientTable = ({ searchTerm }) => {
               <FontAwesomeIcon
                 icon="trash"
                 onClick={onHandleDelete}
-                className="text-red-600 cursor-pointer text-2xl"
+                className="text-gray-600 cursor-pointer text-2xl"
               />
             </div>
           );
@@ -94,15 +95,15 @@ const ClientTable = ({ searchTerm }) => {
     useTable({ columns, data: filteredRows });
 
   return (
-    <div className=" rounded-lg calendar-container w-[800px] h-auto border-t border-l scrollbar-thumb-primary scrollbar-rounded-full scrollbar-track-slate-300 scrollbar-thin">
-      <table {...getTableProps()} className="table-auto w-[800px]">
+    <div className=" rounded-lg calendar-container w-auto md:max-w-[1000px] h-auto max-h-[40em] border-t border-l scrollbar-thumb-primary scrollbar-rounded-full scrollbar-track-slate-300 scrollbar-thin">
+      <table {...getTableProps()} className="table-auto">
         <thead className="sticky top-0">
           {headerGroups?.map((headerGroup) => (
             <tr {...headerGroup?.getHeaderGroupProps()}>
               {headerGroup?.headers?.map((column) => (
                 <th
                   {...column.getHeaderProps()}
-                  className="px-4 py-2 font-semibold bg-primary text-white text-center"
+                  className="px-4 py-2 font-semibold bg-background-100 uppercase text-xl text-white text-center"
                 >
                   {column.render("Header")}
                 </th>
@@ -115,11 +116,11 @@ const ClientTable = ({ searchTerm }) => {
             rows.map((row) => {
               prepareRow(row);
               return (
-                <tr className="bg-[#D9D9D9]" {...row.getRowProps()}>
+                <tr className="bg-white" {...row.getRowProps()}>
                   {row.cells.map((cell) => (
                     <td
                       {...cell.getCellProps()}
-                      className="border px-4 py-2 text-center"
+                      className="border px-4 py-2 text-center text-lg"
                     >
                       {cell.render("Cell")}
                     </td>

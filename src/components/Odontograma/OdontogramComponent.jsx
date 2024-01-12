@@ -8,9 +8,7 @@ import { useParams } from "react-router-dom";
 
 const OdontogramComponent = () => {
   const { id } = useParams();
-  console.log("el id ->", id);
   const [state, setState] = useState({ ...Store, value: 0 });
-  console.log("state ->", state);
   const endpointUrl = import.meta.env.VITE_ENDPOINT;
 
   const handleChange = (event, value) => {
@@ -28,7 +26,6 @@ const OdontogramComponent = () => {
 
   const setFace = (face, index, data) => {
     const acao = state.marked.cor;
-    console.log("marked color ->", acao);
     const newData = { ...data };
     if (acao === newData.faces[index].estado) {
       newData.faces[index].estado = "white";
@@ -56,13 +53,15 @@ const OdontogramComponent = () => {
     <div className="flex flex-col justify-center items-center gap-8">
       <main className="bg-white w-[90%] flex flex-col justify-center items-center p-0 m-0">
         <nav
-          className="bg-primary flex h-12 w-full"
+          className="justify-evenly flex h-12 w-full mb-4"
           value={value}
           onChange={handleChange}
         >
           <button
             className={`text cursor-pointer  h-full ${
-              value === 0 ? "bg-white text-black px-10" : "px-10"
+              value === 0
+                ? "bg-background-100 text-white px-10"
+                : "px-10 ring-1 ring-background-100 text-background-100"
             }`}
             onClick={() => handleChange(null, 0)}
           >
@@ -70,7 +69,9 @@ const OdontogramComponent = () => {
           </button>
           <button
             className={`text cursor-pointer  h-full ${
-              value === 1 ? "bg-white text-black px-10" : "px-10"
+              value === 1
+                ? "bg-background-100 text-white px-10"
+                : "px-10 ring-1 ring-background-100 text-background-100"
             }`}
             onClick={() => handleChange(null, 1)}
           >
@@ -79,7 +80,7 @@ const OdontogramComponent = () => {
         </nav>
 
         {value === 0 && (
-          <div className="m-4 h-[15em] flex flex-wrap justify-center overflow-y-auto">
+          <div className="m-4 h-auto py-5 md:max-h-[15em] flex flex-wrap justify-center overflow-y-hidden">
             {state.arcada.adulto.map((item, index) => {
               return (
                 <Tooth
@@ -95,7 +96,7 @@ const OdontogramComponent = () => {
         )}
 
         {value === 1 && (
-          <div className="lg:px-[9em] m-4 h-[15em] flex flex-wrap justify-center overflow-y-auto">
+          <div className="lg:px-[9em] py-5 m-4 h-[15em] flex flex-wrap justify-center overflow-y-hidden">
             {state.arcada.infantil.map((item, index) => {
               return (
                 <Tooth
@@ -116,8 +117,11 @@ const OdontogramComponent = () => {
           cor={state.marked.cor}
         />
       </main>
-      <button onClick={saveData} className="bg-gray-500 py-2 px-3 rounded-xl">
-        Guardar
+      <button
+        onClick={saveData}
+        className="ring-2 ring-background-100 text-background-100 hover:bg-background-100 hover:text-white py-2 px-6 uppercase rounded-md text-center"
+      >
+        Save
       </button>
     </div>
   );

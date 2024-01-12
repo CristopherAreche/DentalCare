@@ -42,51 +42,53 @@ const Inventory = () => {
   );
 
   return (
-    <div className="flex h-screen w-screen overflow-auto bg-secondary-100">
+    <div className="flex h-screen w-screen overflow-auto bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
       <div className="lg:w-[20%] m-0 z-50 shadow-lg">
         <Sidebar />
       </div>
-      <div className="lg:w-[80%] w-[100vw] mt-10 lg:mt-0 h-[100vh] m-0 lg:flex lg:flex-row flex-col justify-center items-center gap-8 mx-4">
-        <section className="flex flex-col justify-center items-center gap-5">
-          <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
-          <AllProductsTables
-            handleEdit={handleEdit}
-            productos={filteredProducts}
-          />
-          <button
-            onClick={onPostProducts}
-            className="h-[30%] py-2 px-2 transition-all duration-300 ease-in-out text-white rounded-lg w-[10em] m-auto bg-secondary-200 hover:bg-secondary-300 hover:scale-105"
-          >
-            Agregar producto
-          </button>
-        </section>
-        <section className=" flex flex-col gap-9 py-10 items-center">
-          <article className="flex mt-2 transition-all duration-200 ease-in-out flex-col hover:transform hover:scale-105 mx-auto shadow-2xl whitespace-nowrap shadow-black justify-center bg-primary items-center h-[5%] w-full rounded-lg">
-            Cantidad total de productos:
-            <strong className="mt-2 text-2xl">{totalProductos}</strong>
-          </article>
-          <article>
-            <div className="mb-3">
-              <span className="bg-primary p-1 mb-9 rounded">
-                Productos bajo stock
-              </span>
+      <div className="w-[80%] md:max-w-[85em] my-10 m-0 flex flex-col justify-start items-center gap-8">
+        <div className="flex flex-col gap-6">
+          <section className="flex h-[55%] lg:max-h-[35em] flex-col justify-start items-start gap-5">
+            <div className="flex w-full justify-between">
+              <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
+              <button
+                onClick={onPostProducts}
+                className="py-3 px-6 text-xl font-bold transition-all duration-300 ease-in-out text-white rounded-full bg-background-100 hover:scale-105"
+              >
+                Add Product
+              </button>
             </div>
+            <AllProductsTables
+              handleEdit={handleEdit}
+              productos={filteredProducts}
+            />
+          </section>
+          <section className="flex h-[45%] lg:max-h-[35em] gap-5 items-start">
             {inventoryProducts && (
-              <LowStockProducts productos={inventoryProducts} />
-            )}
-          </article>
-          <article className="lg:w-full">
-            <div className="mb-3">
-              <span className="bg-primary p-1 rounded">
-                Productos cerca de vencer
-              </span>
-            </div>
+              <article>
+                <div className="mb-3">
+                  <span className=" text-white text-xl font-bold mb-9 uppercase">
+                    Low Stock Products
+                  </span>
+                </div>
 
-            {inventoryProducts && (
-              <DueDateTable productos={inventoryProducts} />
+                <LowStockProducts productos={inventoryProducts} />
+              </article>
             )}
-          </article>
-        </section>
+
+            <article className="lg:w-full">
+              <div className="mb-3">
+                <span className=" text-white text-xl font-bold mb-9 uppercase">
+                  Products near expiration
+                </span>
+              </div>
+
+              {inventoryProducts && (
+                <DueDateTable productos={inventoryProducts} />
+              )}
+            </article>
+          </section>
+        </div>
       </div>
       {showModal && selectedRow && (
         <EditModal setShowModal={setShowModal} selectedRow={selectedRow} />

@@ -10,11 +10,11 @@ const Patients = () => {
     setSearchTerm(term);
   };
   return (
-    <div className="flex flex-row h-screen w-screen overflow-hidden bg-secondary-100">
-      <div className="lg:w-[20%] m-0 z-50">
+    <div className="flex flex-row h-screen w-screen overflow-hidden bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
+      <div className="lg:w-[20%] z-50">
         <Sidebar />
       </div>
-      <div className="bg-secondary-100 flex flex-col h-[100vh] w-[100vw] justify-center overflow-auto items-center gap-6  mx-4">
+      <div className="flex flex-col h-screen w-[80%] justify-start items-center pt-20 overflow-y-auto gap-10">
         <SearchBar searchTerm={searchTerm} onSearch={handleSearch} />
         <ClientTable searchTerm={searchTerm} />
       </div>

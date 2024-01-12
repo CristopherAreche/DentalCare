@@ -41,13 +41,13 @@ const PatientAppointment = () => {
   };
 
   return (
-    <main className="bg-[#012542] flex flex-col items-center justify-center gap-5 h-[69vh] text-lg text-white font-bold">
+    <main className="bg-white flex flex-col lg:flex-row md:flex-row items-center h-[600px] text-lg text-white font-bold py-4 overflow-y-auto">
       <div className=" gap-3 flex flex-col justify-center  items-center h-[30em] w-[100%] overflow-y-auto">
         {PacientAppointment.length > 0 ? (
           PacientAppointment.map((turno, index) => (
             <section
               key={index}
-              className="bg-primary shadow-sm shadow-black justify-evenly flex flex-row h-max w-[90%] lg:w-[60%] md:w-[70%] rounded-lg py-2"
+              className=" justify-evenly flex flex-row h-max w-[90%] lg:w-[60%] md:w-[70%] rounded-lg py-2"
             >
               <div className="flex flex-col items-center">
                 <label className="text-black underline" htmlFor="">
@@ -75,8 +75,8 @@ const PatientAppointment = () => {
             </section>
           ))
         ) : (
-          <section className="bg-primary text-black text-xl shadow-sm shadow-black justify-evenly flex flex-row h-max w-[80%] rounded-lg py-2">
-            There are no scheduled appointments with this client.
+          <section className=" text-black text-xl justify-evenly flex flex-row h-max w-[80%] rounded-lg py-2">
+            There are no scheduled appointments with this client
           </section>
         )}
       </div>
