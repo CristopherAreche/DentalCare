@@ -12,7 +12,7 @@ import Footer from "../components/LandingPage/Footer";
 
 const LandingPage = () => {
   return (
-    <div className="flex flex-col h-[100vh] max-w-screen overflow-x-hidden">
+    <div className="flex flex-col min-h-screen w-full overflow-x-hidden">
       <Header />
       <NavBar />
       <HeroSection />

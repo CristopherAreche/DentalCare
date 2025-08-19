@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchClient } from "../components/store/features/clientSlice";
+import { fetchClient } from "../store/features/clientSlice";
 import PatientMenu from "../components/PatientsDetails/PatientMenu";
 
 const PatientDetails = () => {
@@ -13,7 +13,7 @@ const PatientDetails = () => {
     dispatch(fetchClient(id));
   }, [dispatch, id]);
   return (
-    <div className="flex flex-row h-screen w-screen overflow-hidden bg-secondary-100">
+    <div className="flex flex-row h-screen w-full overflow-hidden bg-secondary-100">
       <div className="lg:w-[20%] m-0 z-50">
         <Sidebar />
       </div>

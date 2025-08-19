@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginUser } from "../components/store/features/usersSlice";
+import { LoginUser } from "../store/features/usersSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
@@ -42,7 +42,8 @@ const Login = () => {
         nav("/citas");
       }
     } catch (error) {
-      console.error(error);
+      // Error handling is now managed by the Redux slice
+      console.error("Login error:", error);
     }
   };
 

@@ -5,8 +5,8 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchClients } from "../store/features/clientSlice";
-import { fetchData } from "../store/features/calendarSlice";
+import { fetchClients } from "../../store/features/clientSlice";
+import { fetchData } from "../../store/features/calendarSlice";
 
 library.add(faCheck, faEdit, faTrash);
 

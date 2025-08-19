@@ -41,7 +41,6 @@ const SidebarLink = ({ item }) => {
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const userType = useSelector((state) => state.users.type);
-
   const dni = useSelector((state) => state.users.users);
   const onLogout = () => {
     const cookie = new Cookie();

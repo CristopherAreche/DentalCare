@@ -5,7 +5,7 @@ import Banner from "../../components/LandingPage/Banner";
 
 const SectionFive = () => {
   return (
-    <div className="flex flex-col pb-20 justify-center max-w-screen md:py-20 px-10 text-center md:text-start md:px-[8em] bg-background-300">
+    <div className="flex flex-col pb-20 justify-center w-full px-10 text-center md:text-start md:px-[8em] bg-background-300">
       <div className="flex flex-col md:flex-row items-center mb-10 md:mb-20 gap-6 md:gap-0">
         <h1 className="w-full md:w-[70%] text-[3em] md:text-[5em] font-bold text-background-100 leading-[1em] text-center md:text-start">
           What client say

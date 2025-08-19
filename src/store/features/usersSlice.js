@@ -1,12 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import Cookies from "universal-cookie";
+import { apiService } from "../../services/api";
+import { handleError, handleSuccess } from "../../utils/errorHandler";
+import { STORAGE_KEYS } from "../../utils/constants";
 import jwt_decode from "jwt-decode";
-import { useEffect } from "react";
-import Swal from "sweetalert2";
-const cookies = new Cookies();
-
-const userUrl = import.meta.env.VITE_ENDPOINT;
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -18,11 +14,20 @@ export const getUserData = createAsyncThunk(
   "users/getUserData",
   async (_, { getState }) => {
     const state = getState().users;
-    const typeData = cookies.get("token");
+    const typeData =
+      localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN) ||
+      sessionStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
 
     if (typeData) {
-      const decoded = jwt_decode(typeData);
-      return { ...state, type: decoded.admin, users: decoded.id };
+      try {
+        const decoded = jwt_decode(typeData);
+        return { ...state, type: decoded.admin, users: decoded.id };
+      } catch (error) {
+        // Clear invalid token
+        localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+        sessionStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+        return state;
+      }
     }
 
     return state;
@@ -32,20 +37,24 @@ export const getUserData = createAsyncThunk(
 export const LoginUser = createAsyncThunk(
   "user/LoginUser",
   async (formData) => {
-    const response = await axios.post(`${userUrl}/login`, formData);
-    const data = response.data.token;
-
-    return data;
+    try {
+      const response = await apiService.auth.login(formData);
+      return response.token;
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
 export const RegisterUser = createAsyncThunk(
   "user/RegisterUser",
   async (formData) => {
-    const response = await axios.post(`${userUrl}/usuarios`, formData);
-    const data = response.data;
-    console.log("data reg", data);
-    return data;
+    try {
+      const response = await apiService.auth.register(formData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 );
 
@@ -74,7 +83,8 @@ const usersSlice = createSlice({
       })
       .addCase(RegisterUser.rejected, (state, action) => {
         state.regLoading = false;
-        state.error = action.error.message;
+        state.error = action.error.message || "Registration failed";
+        handleError(action.error, "Registration Error");
       });
     builder
       .addCase(LoginUser.pending, (state) => {
@@ -83,22 +93,24 @@ const usersSlice = createSlice({
       .addCase(LoginUser.fulfilled, (state, action) => {
         state.loading = false;
         const responseData = action.payload;
-        cookies.set("token", responseData, { path: "/" });
-        const typeData = cookies.get("token");
-        if (typeData) {
-          const decoded = jwt_decode(typeData);
+
+        // Store token in localStorage for better security
+        localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, responseData);
+
+        try {
+          const decoded = jwt_decode(responseData);
           state.type = decoded.admin;
           state.users = decoded.id;
+          handleSuccess("Login successful!");
+        } catch (error) {
+          state.error = "Invalid token received";
+          handleError(error, "Login Error");
         }
       })
       .addCase(LoginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = "hubo un error al iniciar sesión";
-        Swal.fire(
-          "Hubo un error al iniciar sesión, inténtelo nuevamente",
-          "",
-          "error"
-        );
+        state.error = action.error.message || "Login failed";
+        handleError(action.error, "Login Error");
       })
       .addCase(getUserData.fulfilled, (state, action) => {
         const { type, users } = action.payload;

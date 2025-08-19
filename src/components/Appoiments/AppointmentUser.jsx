@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../store/features/calendarSlice";
+import { fetchData } from "../../store/features/calendarSlice";
 import Swal from "sweetalert2";
 import axios from "axios";
 import {
   getAppointments,
   deleteAppointments,
-} from "../store/features/appointmentsSlice";
+} from "../../store/features/appointmentsSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import { fetchClient } from "../../components/store/features/clientSlice";
+import { fetchClient } from "../../store/features/clientSlice";
 
 const AppointmentUser = () => {
   const dispatch = useDispatch();

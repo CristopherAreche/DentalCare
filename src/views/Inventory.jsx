@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import DueDateTable from "../components/Inventory/DueDateTable";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { useEffect, useState } from "react";
-import { getProducts } from "../components/store/features/inventorySlice";
+import { getProducts } from "../store/features/inventorySlice";
 import SearchBar from "../components/Pacients/SearchBar";
 import EditModal from "../components/Inventory/Modals/EditModal";
 import PostModal from "../components/Inventory/Modals/PostModal";
@@ -42,7 +42,7 @@ const Inventory = () => {
   );
 
   return (
-    <div className="flex h-screen w-screen overflow-auto bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
+    <div className="flex h-screen w-full overflow-auto bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
       <div className="lg:w-[20%] m-0 z-50 shadow-lg">
         <Sidebar />
       </div>

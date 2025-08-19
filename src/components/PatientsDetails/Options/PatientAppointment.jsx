@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import {
   getAppointments,
   deleteAppointments,
-} from "../../store/features/appointmentsSlice";
-import { fetchClient } from "../../store/features/clientSlice";
+} from "../../../store/features/appointmentsSlice";
+import { fetchClient } from "../../../store/features/clientSlice";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Swal from "sweetalert2";

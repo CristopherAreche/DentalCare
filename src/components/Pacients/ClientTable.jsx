@@ -4,11 +4,14 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchClient, fetchClients } from "../store/features/clientSlice";
+import {
+  fetchClient,
+  fetchClients,
+  deleteClient,
+} from "../../store/features/clientSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 library.add(faCheck, faEdit, faTrash);
-import { deleteClient } from "../store/features/clientSlice";
 
 const ClientTable = ({ searchTerm }) => {
   const clients = useSelector((state) => state.clients.clients);

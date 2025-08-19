@@ -8,8 +8,8 @@ import { LiaStarSolid } from "react-icons/lia";
 
 const HeroSection = () => {
   return (
-    <div className="flex justify-center h-auto min-w-[100vw] pt-24 pb-8 md:px-[8em] bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
-      <div className=" flex justify-start gap-10">
+    <div className="flex justify-center h-auto w-full pt-24 pb-8 md:px-[8em] bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
+      <div className="flex justify-start gap-10 max-w-[1200px] w-full">
         {/* left */}
         <div className="hidden md:flex justify-center gap-14 w-[70%]">
           <div>

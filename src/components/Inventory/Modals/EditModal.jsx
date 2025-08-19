@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { putProducts } from '../../store/features/inventorySlice';
+import { putProducts } from '../../../store/features/inventorySlice';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 

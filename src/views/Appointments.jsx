@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../components/store/features/usersSlice";
+import { fetchUsers } from "../store/features/usersSlice";
 import Sidebar from "../components/Sidebar";
 import AppoinmentList from "../components/Appoiments/AppoinmentList";
 import AppointmentUser from "../components/Appoiments/AppointmentUser";
@@ -14,7 +14,7 @@ const Citas = () => {
   }, [dispatch]);
 
   return (
-    <div className="bg-gradient-to-r from-[#0E264B] to-[#3e66a1] flex flex-row h-screen w-screen overflow-hidden bg-secondary-100">
+    <div className="bg-gradient-to-r from-[#0E264B] to-[#3e66a1] flex flex-row h-screen w-full overflow-hidden bg-secondary-100">
       {userType ? (
         <>
           <div className="lg:w-[20%] m-0">

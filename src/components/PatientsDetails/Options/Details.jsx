@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import { fetchClient, updateClient } from "../../store/features/clientSlice";
+import { fetchClient, updateClient } from "../../../store/features/clientSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { clientSelector } from "../../store/features/clientSlice";
+import { clientSelector } from "../../../store/features/clientSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faCheck } from "@fortawesome/free-solid-svg-icons";
 const Details = () => {

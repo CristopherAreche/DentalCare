@@ -5,7 +5,7 @@ import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { fetchClient } from "../../components/store/features/clientSlice";
+import { fetchClient } from "../../store/features/clientSlice";
 import Swal from "sweetalert2";
 library.add(faQuestion);
 

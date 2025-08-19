@@ -3,12 +3,11 @@ import DienteForm from "./DienteForm";
 import axios from "axios";
 
 const DienteApp = () => {
+  const apiUrl = import.meta.env.VITE_ENDPOINT;
+
   const handleSubmit = (data) => {
     axios
-      .post(
-        "api-sist-odontologico-production-889e.up.railway.app/dientes",
-        data
-      )
+      .post(`${apiUrl}/dientes`, data)
       .then((response) => {
         console.log("Respuesta del servidor:", response.data);
       })

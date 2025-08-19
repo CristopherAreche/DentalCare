@@ -10,10 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  LoginUser,
-  RegisterUser,
-} from "../components/store/features/usersSlice";
+import { LoginUser, RegisterUser } from "../store/features/usersSlice";
 import Swal from "sweetalert2";
 import RegistrationImage from "../assets/login_image.avif";
 import { FaArrowLeft } from "react-icons/fa";
@@ -37,19 +34,13 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const response = await dispatch(RegisterUser(data));
-      console.log(response.type);
       if (response.type === "user/RegisterUser/fulfilled") {
         await dispatch(LoginUser(data));
         nav("/client-form");
-      } else {
-        Swal.fire(
-          "There was an error with the registration. Please try again.",
-          "",
-          "error"
-        );
       }
     } catch (error) {
-      console.error(error);
+      // Error handling is now managed by the Redux slice
+      console.error("Registration error:", error);
     }
   };
 

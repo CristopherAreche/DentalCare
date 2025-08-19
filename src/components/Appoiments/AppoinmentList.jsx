@@ -5,15 +5,15 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchClient } from "../store/features/clientSlice";
+import { fetchClient } from "../../store/features/clientSlice";
 import DateFilter from "./DateFilter";
-import { fetchData } from "../store/features/calendarSlice";
+import { fetchData } from "../../store/features/calendarSlice";
 import {
   getAppointments,
   deleteAppointments,
   cleanAppointments,
   postAppointment,
-} from "../store/features/appointmentsSlice";
+} from "../../store/features/appointmentsSlice";
 import Swal from "sweetalert2";
 
 const AppoinmentList = ({ setStartDate, startDate }) => {

@@ -16,7 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createClient } from "../store/features/clientSlice";
+import { createClient } from "../../store/features/clientSlice";
 import DateOfBirth from "./DateOfBirth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RegistrationImage from "../../assets/login_image.avif";

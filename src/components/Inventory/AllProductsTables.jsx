@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { useDispatch } from "react-redux";
-import { deleteProducts } from "../store/features/inventorySlice";
+import { deleteProducts } from "../../store/features/inventorySlice";
 import Swal from "sweetalert2";
 library.add(faCheck, faEdit, faTrash);
 

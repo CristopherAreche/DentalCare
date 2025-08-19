@@ -10,7 +10,7 @@ import {
 import {
   fetchClient,
   updateClient,
-} from "../../../components/store/features/clientSlice.js";
+} from "../../../store/features/clientSlice.js";
 import Swal from "sweetalert2";
 import { library } from "@fortawesome/fontawesome-svg-core";
 library.add(faIdCard, faLock, faEnvelope);

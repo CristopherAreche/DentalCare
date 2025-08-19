@@ -1,26 +1,26 @@
 import React from "react";
 import DienteForm from "../components/Dientes/DienteForm";
-import axios from "axios";
+import { apiService } from "../services/api";
+import { handleError, handleSuccess } from "../utils/errorHandler";
 
 const Diente = () => {
-  const url = import.meta.env.VITE_ENDPOINT;
   const handleSubmit = async (data) => {
     try {
-      // Primero, verifica si existe un diente con el mismo número
-      const existingDienteResponse = await axios.get(
-        `${url}/dientes?numero=${data.numero}`
-      );
+      // First, check if a tooth with the same number exists
+      const existingTeeth = await apiService.teeth.getByNumber(data.numero);
 
-      if (existingDienteResponse.data.length > 0) {
-        // Si existe, actualiza ese diente
-        const existingDiente = existingDienteResponse.data[0];
-        await axios.put(`${url}/dientes/${existingDiente.id}`, data);
+      if (existingTeeth.length > 0) {
+        // If exists, update that tooth
+        const existingTooth = existingTeeth[0];
+        await apiService.teeth.update(existingTooth.id, data);
+        handleSuccess("Tooth updated successfully!");
       } else {
-        // Si no existe, crea un nuevo diente
-        await axios.post(`${url}/dientes`, data);
+        // If not exists, create a new tooth
+        await apiService.teeth.create(data);
+        handleSuccess("Tooth created successfully!");
       }
     } catch (error) {
-      console.error("Error al enviar los datos:", error);
+      handleError(error, "Tooth Operation");
     }
   };
 

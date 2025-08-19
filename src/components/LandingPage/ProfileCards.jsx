@@ -29,7 +29,7 @@ const ProfileCards = () => {
     },
   ];
   return (
-    <div className="flex flex-col md:flex-row gap-8">
+    <div className="flex flex-col md:flex-row gap-8 pb-48">
       {dentistList.map(({ image, name, rating, profession, profileLink }) => (
         <div class="max-w-sm bg-[#e7f2fe] rounded-2xl">
           <img
@@ -48,7 +48,7 @@ const ProfileCards = () => {
               {name}
             </h5>
 
-            <p className="mb-3 font-normal text-gray-500 ">{profession}</p>
+            <p className="mb-3 font-normal text-gray-500">{profession}</p>
             <a
               href="#"
               className="text-blue-500 p-y border-b-2 border-blue-500"

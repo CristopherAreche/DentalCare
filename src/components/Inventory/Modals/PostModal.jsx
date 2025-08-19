@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { postProducts } from "../../store/features/inventorySlice";
+import { postProducts } from "../../../store/features/inventorySlice";
 import Swal from "sweetalert2";
 const PostModal = ({ setShowPostModal }) => {
   const dispatch = useDispatch();

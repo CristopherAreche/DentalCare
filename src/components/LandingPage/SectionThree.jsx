@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const SectionThree = () => {
   return (
-    <div className="flex flex-col pb-20 justify-center max-w-screen py-20 px-10 text-center md:text-start md:px-[8em]  bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
+    <div className="flex flex-col justify-center w-full py-20 px-10 text-center md:text-start md:px-[8em]  bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
       <div className="flex flex-col md:flex-row items-center mb-10 md:mb-20 gap-6 md:gap-0">
         <h1 className="text-[3em] w-full md:w-1/2 md:text-[5em] font-bold text-white leading-[1em]">
           A reason for smiling

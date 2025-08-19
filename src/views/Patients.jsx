@@ -10,7 +10,7 @@ const Patients = () => {
     setSearchTerm(term);
   };
   return (
-    <div className="flex flex-row h-screen w-screen overflow-hidden bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
+    <div className="flex flex-row h-screen w-full overflow-hidden bg-gradient-to-r from-[#0E264B] to-[#3e66a1] ">
       <div className="lg:w-[20%] z-50">
         <Sidebar />
       </div>

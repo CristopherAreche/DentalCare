@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
-import { clientSelector } from "../../store/features/clientSlice.js";
+import { clientSelector } from "../../../store/features/clientSlice.js";
 import ModalH from "./ModalH.jsx";
 
 const MedicalHistoryForm = ({ isModalOpen, setIsModalOpen }) => {

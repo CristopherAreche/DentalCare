@@ -6,7 +6,7 @@ import { BsInstagram } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <footer className="w-full h-auto md:h-screen md:px-[7em]  bottom-0 flex flex-col justify-center text-[#f4f9ff] py-8 md:pt-14 text-lg bg-gradient-to-r from-[#0E264B] to-[#3e66a1]">
+    <footer className="w-full h-auto md:h-auto md:px-[7em]  bottom-0 flex flex-col justify-center text-[#f4f9ff] py-8 md:pt-14 text-lg bg-gradient-to-r from-[#0E264B] to-[#3e66a1]">
       <div className="flex gap-6 md:gap-0 flex-col md:flex-row pb-12 border-b-2 border-blue-200">
         <div className="flex flex-col gap-6 w-full items-center md:items-start md:w-1/2">
           <div className="flex gap-2 items-center">

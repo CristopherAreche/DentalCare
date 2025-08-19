@@ -4,7 +4,7 @@ import {
   clientSelector,
   fetchClient,
   putHistorial,
-} from "../../store/features/clientSlice";
+} from "../../../store/features/clientSlice";
 import axios from "axios";
 import { useEffect } from "react";
 
