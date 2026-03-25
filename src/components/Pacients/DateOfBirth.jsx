@@ -1,29 +1,31 @@
 import { useState } from "react";
-import DatePicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import es from "date-fns/locale/es";
-import moment from "moment";
-registerLocale("es", es);
+import dayjs from "dayjs";
+import 'dayjs/locale/es';
+dayjs.locale('es');
 
 function DateOfBirth(props) {
   const { onSelect } = props;
-  const [startDate, setStartDate] = useState();
+  const [startDate, setStartDate] = useState("");
 
-  const handleValueChange = (newValue) => {
-    const formattedDate = moment(newValue).format("DD/MM/YYYY");
+  const handleValueChange = (e) => {
+    const newValue = e.target.value;
+    if (!newValue) {
+      setStartDate("");
+      return;
+    }
+    // Convert YYYY-MM-DD to DD/MM/YYYY
+    const formattedDate = dayjs(newValue).format("DD/MM/YYYY");
     setStartDate(newValue);
     onSelect({ date: formattedDate });
   };
 
   return (
-    <DatePicker
-      locale="es"
-      selected={startDate}
+    <input
+      type="date"
+      value={startDate}
       onChange={handleValueChange}
-      isClearable
-      placeholderText="dd/mm/aa"
-      className="text-center py-2 rounded w-[17em]"
-      dateFormat="dd/MM/yyy"
+      className="text-center py-2 px-4 rounded w-[17em] bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="dd/mm/aa"
     />
   );
 }

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { putProducts } from '../../../store/features/inventorySlice';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
+import dayjs from 'dayjs';
 
 const EditModal = ({ selectedRow, setShowModal }) => {
   const fechaParts = selectedRow.vencimiento.split('/');
@@ -39,7 +39,7 @@ const EditModal = ({ selectedRow, setShowModal }) => {
       const fechaVencimiento = new Date(year, month, day);
 
       // Formatear la fecha en formato dia mes año
-      const fechaFormateada = format(fechaVencimiento, 'dd/MM/yyyy');
+      const fechaFormateada = dayjs(fechaVencimiento).format('DD/MM/YYYY');
 
       const newData = { ...data, vencimiento: fechaFormateada };
       const result = await Swal.fire({
@@ -69,103 +69,106 @@ const EditModal = ({ selectedRow, setShowModal }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm">
-      <div className="bg-primary h-auto w-auto rounded-xl flex flex-col items-center">
-        <strong className="flex justify-center text-xl">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-filter backdrop-blur-sm z-50">
+      <div className="bg-primary h-auto w-auto p-8 rounded-xl flex flex-col items-center">
+        <strong className="flex justify-center text-xl text-white mb-6">
           Editando producto:{' '}
-          <span className="underline text-black">{selectedRow.nombre}</span>
+          <span className="underline ml-2">{selectedRow.nombre}</span>
         </strong>
         <section>
           <form>
-            <section className="flex flex-row justify-center items-center gap-5 mt-[10%]">
-              <article className="flex flex-col gap-1 ">
-                <label htmlFor="">Nombre</label>
+            <section className="flex flex-row justify-center items-start gap-8">
+              <article className="flex flex-col gap-2 w-full">
+                <label className="text-white" htmlFor="nombre">Nombre</label>
                 <input
                   type="text"
                   id="nombre"
                   placeholder="Nombre"
-                  className="bg-slate-300 border-solid border rounded-md border-black"
+                  className="bg-slate-100 p-2 border-solid border rounded-md border-black"
                   defaultValue={selectedRow.nombre}
                   {...register('nombre', {
                     required: 'Campo obligatorio',
                   })}
                 />
                 {errors.nombre && (
-                  <p className="text-red-500">{errors.nombre.message}</p>
+                  <p className="text-red-400 text-sm">{errors.nombre.message}</p>
                 )}
-                <label htmlFor="">Cantidad</label>
+                
+                <label className="text-white mt-2" htmlFor="cantidad">Cantidad</label>
                 <input
                   type="number"
                   min="0"
                   id="cantidad"
                   placeholder="Cantidad"
-                  className="bg-slate-300 border-solid border rounded-md border-black"
+                  className="bg-slate-100 p-2 border-solid border rounded-md border-black"
                   defaultValue={selectedRow.cantidad}
                   {...register('cantidad', {
                     required: 'Campo obligatorio',
                   })}
                 />
                 {errors.cantidad && (
-                  <p className="text-red-500">{errors.cantidad.message}</p>
+                  <p className="text-red-400 text-sm">{errors.cantidad.message}</p>
                 )}
-                <label htmlFor="">Stock minimo</label>
+                
+                <label className="text-white mt-2" htmlFor="stockMin">Stock minimo</label>
                 <input
                   type="number"
                   min="0"
                   id="stockMin"
-                  className="bg-slate-300 border-solid border rounded-md border-black"
-                  placeholder="stockMin"
+                  className="bg-slate-100 p-2 border-solid border rounded-md border-black"
+                  placeholder="Stock mínimo"
                   defaultValue={selectedRow.stockMinimo}
                   {...register('stockMinimo', {
                     required: 'Campo obligatorio',
                   })}
                 />
                 {errors.stockMinimo && (
-                  <p className="text-red-500">{errors.stockMinimo.message}</p>
+                  <p className="text-red-400 text-sm">{errors.stockMinimo.message}</p>
                 )}
               </article>
-              <article className="flex flex-col gap-1 w-[40%]">
-                <label htmlFor="">Lote</label>
+              
+              <article className="flex flex-col gap-2 w-full">
+                <label className="text-white" htmlFor="lote">Lote</label>
                 <input
                   type="text"
                   id="lote"
                   placeholder="Lote"
                   defaultValue={selectedRow.lote}
-                  className="bg-slate-300 border-solid border rounded-md border-black"
+                  className="bg-slate-100 p-2 border-solid border rounded-md border-black"
                   {...register('lote', {
                     required: 'Campo obligatorio',
                   })}
                 />
                 {errors.lote && (
-                  <p className="text-red-500">{errors.lote.message}</p>
+                  <p className="text-red-400 text-sm">{errors.lote.message}</p>
                 )}
-                <label htmlFor="">Fecha de vencimiento</label>
+                
+                <label className="text-white mt-2" htmlFor="vencimiento">Fecha de vencimiento</label>
                 <input
                   type="date"
                   id="vencimiento"
-                  placeholder="vencimiento"
                   defaultValue={formattedVencimiento}
-                  className="bg-slate-300 border-solid border rounded-md border-black"
+                  className="bg-slate-100 p-2 border-solid border rounded-md border-black"
                   {...register('vencimiento', {
                     required: 'Campo obligatorio',
                   })}
                 />
                 {errors.vencimiento && (
-                  <p className="text-red-500">{errors.vencimiento.message}</p>
+                  <p className="text-red-400 text-sm">{errors.vencimiento.message}</p>
                 )}
               </article>
             </section>
           </form>
         </section>
-        <div className="flex mt-[2%] mb-[5%] justify-center gap-4 items-center">
+        <div className="flex w-full mt-8 justify-center gap-4 items-center">
           <button
-            className="p-1 bg-red-900 hover:bg-red-600 rounded-lg"
+            className="px-6 py-2 text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors font-medium"
             onClick={() => setShowModal(false)}
           >
             Cancelar
           </button>
           <button
-            className="p-1 bg-blue-500 hover:bg-blue-900 rounded-lg"
+            className="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors font-medium"
             type="submit"
             onClick={handleSubmit((data) =>
               onSubmit({ ...data, id: selectedRow.id })

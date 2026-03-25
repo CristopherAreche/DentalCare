@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { add, format, setDate, sub } from "date-fns";
+import dayjs from "dayjs";
+import 'dayjs/locale/es';
 import Cell from "./Cell";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCheck, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -10,11 +11,13 @@ import { fetchData } from "../../store/features/calendarSlice";
 
 library.add(faCheck, faEdit, faTrash);
 
+dayjs.locale('es');
+
 const Calendar = ({ value = new Date(), onChange }) => {
-  const prevMonth = () => onChange(sub(value, { months: 1 }));
-  const nextMonth = () => onChange(add(value, { months: 1 }));
-  const prevYear = () => onChange(sub(value, { years: 1 }));
-  const nextYear = () => onChange(add(value, { years: 1 }));
+  const prevMonth = () => onChange(dayjs(value).subtract(1, 'month').toDate());
+  const nextMonth = () => onChange(dayjs(value).add(1, 'month').toDate());
+  const prevYear = () => onChange(dayjs(value).subtract(1, 'year').toDate());
+  const nextYear = () => onChange(dayjs(value).add(1, 'year').toDate());
 
   const [canUpdate, setCanUpDate] = useState(true);
   const [inputClients, setInputClients] = useState([]);
@@ -52,7 +55,7 @@ const Calendar = ({ value = new Date(), onChange }) => {
   const [tableData, setTableData] = useState({});
 
   const handleClickDate = (index) => {
-    const date = setDate(value, index);
+    const date = dayjs(value).date(index).toDate();
     onChange(date);
   };
 
@@ -134,7 +137,7 @@ const Calendar = ({ value = new Date(), onChange }) => {
       <div className="text-center flex gap-3 justify-center bg-primary text-white font-bold">
         <Cell onClick={prevYear}>{"<<"}</Cell>
         <Cell onClick={prevMonth}>{"<"}</Cell>
-        <Cell className="col-span-3">{format(value, "LLLL yyyy")}</Cell>
+        <Cell className="col-span-3 capitalize">{dayjs(value).format("MMMM YYYY")}</Cell>
         <Cell onClick={nextMonth}>{">"}</Cell>
         <Cell onClick={nextYear}>{">>"}</Cell>
       </div>
